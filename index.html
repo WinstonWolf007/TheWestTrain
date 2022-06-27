@@ -13,14 +13,16 @@
 </head>
 <body>  
 
+    <script src="./Scenes/company.js"></script>
     <script src="./Scenes/title.js"></script>
+
     <script>
         // config game scene
         const config = {
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Title]
+            scene: [Company, Title]
         };
 
         game = new Phaser.Game(config);
