@@ -69,7 +69,10 @@ class Home extends Phaser.Scene {
         // change scene if btn is clicked
         this.startBtn.on('pointerdown', () => {
             this.bgSound.stop();
-            this.scene.start('shop');
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            setTimeout(() => {
+                this.scene.start('shop');
+            }, 1000);
         })
     }
 }

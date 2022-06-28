@@ -26,13 +26,13 @@ class Company extends Phaser.Scene {
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             setTimeout(() => {
                 this.scene.start('home');
-            }, 2000);
+            }, 1000);
         }
 
         if (this.finishWrite) {
             const safeText = this.indicText.text;
             this.finishWrite = false;
-            
+
             setInterval(() => {
                 if (this.change) {
                     this.change = false;

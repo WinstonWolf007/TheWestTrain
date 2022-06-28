@@ -9,6 +9,7 @@ class Shop extends Phaser.Scene {
     }
 
     preload() {
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
         this.load.spritesheet("bgBar", './Assets/map-menu/shop.png', {
             frameWidth: 1200,
             frameHeight: 736
