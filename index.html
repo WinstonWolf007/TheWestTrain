@@ -7,22 +7,28 @@
     <title>The West Train</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
     <base href=".">
+    <link rel="shortcut icon" href="#">
     <style>
         body {margin: 0;}
     </style>
 </head>
 <body>  
-    <script src="./Scenes/shop/shop.js"></script>
-    <script src="./Scenes/company.js"></script>
-    <script src="./Scenes/title.js"></script>
+    <!-- All default function -->
+    <script src="./DefaultScript/soundAdd.js"></script>
 
+    <!-- All scenes -->
+    
+    <script src="./Scenes/company.js"></script>
+    <script src="./Scenes/home.js"></script>
+    <script src="./Scenes/shop/shop.js"></script>
+
+    <!-- Home config -->
     <script>
-        // config game scene
         const config = {
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Company,Title, Shop],
+            scene: [Company, Home, Shop],
             physics: {
                 default: 'arcade',
                 arcade: {

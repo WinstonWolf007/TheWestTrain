@@ -34,18 +34,11 @@ class Shop extends Phaser.Scene {
             repeat: 1
         })
 
-        this.barSound = this.sound.add('barMusic', {
-            volume: 1,
-            loop: true
-        })
-
-        this.clickSound = this.sound.add('click', {
-            volume: 0.1,
-            loop: false
-        })
+        // sound add function <clickSound.js>
+        this.barSound = SoundAdd(this, 'barMusic', 1, true)
+        this.clickSound = SoundAdd(this, 'click', 0.1, false);
 
         this.barSound.play();
-        
     }
 
     update() {
