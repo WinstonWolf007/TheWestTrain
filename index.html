@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>  
-
+    <script src="./Scenes/shop/shop.js"></script>
     <script src="./Scenes/company.js"></script>
     <script src="./Scenes/title.js"></script>
 
@@ -22,7 +22,17 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Company, Title]
+            scene: [Company,Title, Shop],
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 1 },
+                    debug: false
+                }
+            },
+            audio: {
+                disableWebAudio: true
+            }
         };
 
         game = new Phaser.Game(config);

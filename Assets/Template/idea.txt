@@ -1,0 +1,63 @@
+/===== Map size =====/
+
+pick (w/h) img (icon[0, 2, 4])
+
+create the grid case.
+
+If user onclick "small map", incrase img size.
+
+Else if user onclick "medium" or more, reduce img size
+
+Just put more basement (It are more small) ^^
+
+
+
+/===== Combat sys =====/
+
+cowboys gun shoot
+
+put a time (3 seconds) and when time is equal to 0, the user must shooting more speed than other enemy
+
+
+
+/===== Shops items =====/
+
+ * buy new gun with different charateristic (more damage, more bullet, more speed)
+ 
+ * incrase bank storage
+
+ * buy the joker
+
+
+
+/===== Basement characteristic =====/
+
+health is to bonus solider resitance (It don't attack but he incrase the solider num to end attack)
+
+Gold mine (+gold coin) => {"gold": 3, "housing": 20, "health": 10} -> more gold
+
+Indian camp (+housing) => {"gold": 1, "housing": 60, "health": 5} -> more solider
+
+Haunted bar (+health) => {"gold": 1, "housing": 30, "health": 15} -> more security
+
+
+/===== Game Element =====/
+
+Gun: If there are not bullet, you lost 1 combat cycles (you don't shoot this cycle)
+
+  * pistol (+speed) => {"speed": 0.5, "damage": 2, "bullet": 5} -> more speed attack
+  * shotgun (+damage) => {"speed": 1.5, "damage": 5, "bullet": 2} -> more damage
+  * machine gun (+bullet) => {"speed": 1, "damage": "3", "bullet": 24} -> shoot 3 bullets (1 damage each bullet * 3) to each attack > 8 shoots
+
+Gold: It used for buy in shop or for colony
+
+ * It is store in bank (buy more storage in shop)
+ * Buy the food for solider colony
+
+
+Solider: 
+
+  * The colony
+  * It used for update protection basement => If there are event:
+     Royal army fight your basement, if enemy solider number is less than you, you won and you lost (your soliders - enemy solider)
+  * It is necessary to gived the food, for add new solider (don't give food == less colony number)

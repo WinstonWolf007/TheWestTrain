@@ -4,8 +4,8 @@ class Title extends Phaser.Scene {
     }
 
     preload() {
+        // set begin value
         this.cameras.main.fadeIn(1000, 0, 0, 0);
-
         this.cameras.main.setBackgroundColor('#ead9a7');
     
         this.load.image('title', './Assets/map-menu/menuTitle.png');
@@ -14,11 +14,6 @@ class Title extends Phaser.Scene {
         this.load.image('icon1', './Assets/basement/icon0.png');
         this.load.image('icon2', './Assets/basement/icon2.png');
         this.load.image('icon3', './Assets/basement/icon4.png');
-
-        this.load.spritesheet('animIcon', './Assets/basement/animation.png', {
-            frameWidth: 1000,
-            frameHeight: 1000
-        });
     }
     
     create() {
@@ -31,14 +26,10 @@ class Title extends Phaser.Scene {
         let icon2;
         let icon3;
 
-        let animsIcons;
-
         // --------------- back ---------------
         icon1 = this.add.image(200, 500, 'icon1');
         icon2 = this.add.image(1300, 700, 'icon2');
-        icon3 = this.add.image(1300, 200, 'icon3');
-
-        animsIcons = this.add
+        icon3 = this.add.image(1200, 300, 'icon3');
         
         // change size
         [icon1, icon2, icon3].forEach(icons => {

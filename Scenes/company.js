@@ -5,17 +5,7 @@ class Company extends Phaser.Scene {
 
     create() {
         this.add.text(50, 20, 'Game maked by WinstonWolf007', {fontSize: 50})
-
         this.add.text(50, 100, 'Press SPACE...', {fontSize: 30})
-
-        
-    
-        // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-        //     this.scene.start('title')
-        // })
-        // setTimeout(() => {
-        //     this.scene.start('title')
-        // }, 2000)
     }
 
     update() {
