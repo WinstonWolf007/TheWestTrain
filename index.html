@@ -16,11 +16,15 @@
     <!-- All default function -->
     <script src="./DefaultScript/soundAdd.js"></script>
 
+    <script src="./DefaultScript/btnEvent.js"></script>
+
     <!-- All scenes -->
     
     <script src="./Scenes/company.js"></script>
-    <script src="./Scenes/home.js"></script>
+    
     <script src="./Scenes/shop/shop.js"></script>
+
+    <script src="./Scenes/home.js"></script>
 
     <!-- Home config -->
     <script>
@@ -29,6 +33,7 @@
             width: 1500,
             height: 920,
             scene: [Company, Home, Shop],
+            //scene: [Shop],
             physics: {
                 default: 'arcade',
                 arcade: {

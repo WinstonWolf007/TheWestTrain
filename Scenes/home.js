@@ -11,6 +11,7 @@ class Home extends Phaser.Scene {
         this.icon3;
 
         this.bgSound;
+        this.clickSound;
     }
 
     preload() {
@@ -25,13 +26,16 @@ class Home extends Phaser.Scene {
         this.load.image('icon2', './Assets/basement/icon2.png');
         this.load.image('icon3', './Assets/basement/icon4.png');
 
-        this.load.audio('music', './Assets/music/countryboy.mp3')
+        this.load.audio('music', './Assets/music/countryboy.mp3');
+        this.load.audio('click', './Assets/music/click.wav');
     }
     
     create() {
         // music load
-        this.bgSound = SoundAdd(this, 'music', 1, true)
-        this.bgSound.play()
+        this.bgSound = SoundAdd(this, 'music', 1, true);
+        this.bgSound.play();
+
+        this.clickSound = SoundAdd(this, 'click', 0.1, false);
 
         // --------------- back ---------------
         this.icon1 = this.add.image(200, 500, 'icon1');
@@ -50,21 +54,6 @@ class Home extends Phaser.Scene {
         
         //  change size
         this.title.setScale(0.8);
-        
-        // add hover and out event
-        [this.startBtn, this.settingsBtn].forEach(btn => {
-        
-            btn.on('pointerover', () => {
-                btn.setTint(0xffff0f);
-                game.canvas.style.cursor = "pointer";
-            });
-        
-            btn.on('pointerout', () => {
-                btn.setTint(0xffffff);
-                game.canvas.style.cursor = "default";
-            });
-        
-        });
 
         // change scene if btn is clicked
         this.startBtn.on('pointerdown', () => {
@@ -75,4 +64,9 @@ class Home extends Phaser.Scene {
             }, 1000);
         })
     }
+
+    update() {
+        btnEvent([this.startBtn, this.settingsBtn], this.clickSound)
+    }
 }
+
