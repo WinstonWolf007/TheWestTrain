@@ -11,7 +11,7 @@ class Shop extends Phaser.Scene {
 
     preload() {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
-        
+
         this.load.spritesheet("bgBar", './Assets/map-menu/shop.png', {
             frameWidth: 1200,
             frameHeight: 736
@@ -26,9 +26,9 @@ class Shop extends Phaser.Scene {
     }
 
     create() {
-        // sound add function <clickSound.js>
+        // sound add function <clickSound.js> 
         this.barSound = SoundAdd(this, 'barMusic', 1, true);
-        this.clickSound = SoundAdd(this, 'click', 0.1, false);
+        this.clickSound = SoundAdd(this, 'click', 0.5, false);
 
         this.barSound.play();
 

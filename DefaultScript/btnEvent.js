@@ -2,6 +2,7 @@ function btnEvent(allBtn, clickVar) {
     allBtn.forEach(btn => {
         btn.on('pointerdown', () => {
             clickVar.play();
+            setCursor('default')
         });
 
         btn.on('pointerover', () => {

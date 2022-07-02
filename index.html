@@ -13,21 +13,29 @@
         body {margin: 0;}
     </style>
 </head>
-<body>  
+<body style="background-color: black;">
+    <!-- json data -->
+    <script src="./Data/json.js"></script>
+
     <!-- All default function -->
     <script src="./DefaultScript/soundAdd.js"></script>
 
     <script src="./DefaultScript/btnEvent.js"></script>
 
-    <!-- All scenes -->
-    
-    <script src="./Scenes/company.js"></script>
+    <script src="./DefaultScript/cursor.js"></script>
+
+    <script src="./DefaultScript/volume.js"></script>
+
+    <!-- All scenes game -->
+    <script src="./Scenes/BeginGame/licence.js"></script>
+
+    <script src="./Scenes/BeginGame/company.js"></script>
     
     <script src="./Scenes/shop/shop.js"></script>
 
-    <script src="./Scenes/home.js"></script>
+    <script src="./Scenes/settings/settings.js"></script>
 
-    <script src="./Scenes/begin.js"></script>
+    <script src="./Scenes/home.js"></script>
 
     <!-- Home config -->
     <script>
@@ -35,8 +43,8 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Begin, Company, Home, Shop],
-            //scene: [Shop],
+            //scene: [Company, Begin, Home, Settings, Shop],
+            scene: [Settings],
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -46,6 +54,10 @@
             },
             audio: {
                 disableWebAudio: true
+            },
+            fps: {
+                target: 60,
+                forceSetTimeOut: false
             }
         };
 
@@ -60,5 +72,6 @@
 ---/ Start Scene /---
 
 this.scene.start('<super name class>')
-
+ghj
+    ff
 -->

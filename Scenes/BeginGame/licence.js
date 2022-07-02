@@ -1,9 +1,11 @@
 class Company extends Phaser.Scene {
     constructor() {
-        super('company');
+        super('licence');
         this.indicText;
         this.finishWrite = false;
         this.change = false;
+        this.end = false;
+        this.neon;
     }
 
     create() {
@@ -19,13 +21,17 @@ class Company extends Phaser.Scene {
 
         this.indicText = this.add.text(50, 700, '', {fontSize: 40})
         this.typewriteText('Press SPACE...');
+
+        
     }
 
     update() {
         if (this.input.keyboard.addKey('SPACE').isDown) {
+            clearInterval(this.neon)
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             setTimeout(() => {
-                this.scene.start('home');
+                this.scene.start('company');
+                this.scene.stop('licence')
             }, 1000);
         }
 
@@ -33,7 +39,7 @@ class Company extends Phaser.Scene {
             const safeText = this.indicText.text;
             this.finishWrite = false;
 
-            setInterval(() => {
+            this.neon = setInterval(() => {
                 if (this.change) {
                     this.change = false;
                     this.indicText.text = ''
@@ -45,6 +51,10 @@ class Company extends Phaser.Scene {
 
             this.indicText.text = safeText;
         }
+
+        
+
+        
     }
 
     typewriteText(text) {
