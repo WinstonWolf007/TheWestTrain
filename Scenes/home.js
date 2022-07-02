@@ -31,11 +31,12 @@ class Home extends Phaser.Scene {
     }
     
     create() {
+        console.log(JSON)
         // music load
-        this.bgSound = SoundAdd(this, 'music', 0.7, true);
+        this.bgSound = SoundAdd(this, 'music', JSON['volume']['bg'], true);
         this.bgSound.play();
 
-        this.clickSound = SoundAdd(this, 'click', 0.5, false);
+        this.clickSound = SoundAdd(this, 'click', JSON['volume']['fg'], false);
 
         // --------------- back ---------------
         this.icon1 = this.add.image(200, 500, 'icon1');

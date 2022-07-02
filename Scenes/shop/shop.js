@@ -21,18 +21,14 @@ class Shop extends Phaser.Scene {
 
         this.load.audio("barMusic", './Assets/music/psychedelic.mp3');
         this.load.audio('click', './Assets/music/click.wav');
-
-        this.load.json('Set', './settings.json');
     }
 
     create() {
         // sound add function <clickSound.js> 
-        this.barSound = SoundAdd(this, 'barMusic', 1, true);
-        this.clickSound = SoundAdd(this, 'click', 0.5, false);
+        this.barSound = SoundAdd(this, 'barMusic', JSON['volume']['bg'], true);
+        this.clickSound = SoundAdd(this, 'click', JSON['volume']['fg'], false);
 
         this.barSound.play();
-
-        this.set = this.cache.json.get('Set');
         this.physics.pause();
 
         this.bgBar = this.physics.add.sprite(750, 460, 'bgBar').setInteractive();

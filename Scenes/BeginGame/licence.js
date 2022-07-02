@@ -51,10 +51,6 @@ class Company extends Phaser.Scene {
 
             this.indicText.text = safeText;
         }
-
-        
-
-        
     }
 
     typewriteText(text) {
