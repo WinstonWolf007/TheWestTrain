@@ -12,7 +12,7 @@ class Shop extends Phaser.Scene {
     preload() {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-        this.load.spritesheet("bgBar", './Assets/map-menu/shop.png', {
+        this.load.spritesheet("ShopImg", './Assets/map-menu/shop.png', {
             frameWidth: 1200,
             frameHeight: 736
         });
@@ -31,7 +31,7 @@ class Shop extends Phaser.Scene {
         this.barSound.play();
         this.physics.pause();
 
-        this.bgBar = this.physics.add.sprite(750, 460, 'bgBar').setInteractive();
+        this.bgBar = this.physics.add.sprite(750, 460, 'ShopImg').setInteractive();
         this.bgBar.setScale(1.25);
         
         // btn image
@@ -40,17 +40,15 @@ class Shop extends Phaser.Scene {
 
         this.anims.create({
             key: 'iddle',
-            frames: this.anims.generateFrameNumbers('bgBar', { start: 0, end: 1 }),
+            frames: this.anims.generateFrameNumbers('ShopImg', { start: 0, end: 1 }),
             frameRate: 1,
-            repeat: 1
+            repeat: -1
         });
 
-        
+        this.bgBar.anims.play('iddle', true);
     }
 
     update() {
-        this.bgBar.anims.play('iddle', true);
-
         btnEvent([this.btnBack], this.clickSound);
 
         this.btnBack.on('pointerdown', () => {

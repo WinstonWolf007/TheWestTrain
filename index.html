@@ -63,16 +63,19 @@
         };
 
         game = new Phaser.Game(config);
+        window.addEventListener('resize', () => {
+            var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+            var wratio = width / height, ratio = canvas.width / canvas.height;
+
+            if (wratio < ratio) {
+                canvas.style.width = width + "px";
+                canvas.style.height = (width / ratio) + "px";
+            } else {
+                canvas.style.width = (height * ratio) + "px";
+                canvas.style.height = height + "px";
+            }
+        });
     </script>
     
 </body>
 </html>
-
-<!--
-
----/ Start Scene /---
-
-this.scene.start('<super name class>')
-ghj
-    ff
--->
