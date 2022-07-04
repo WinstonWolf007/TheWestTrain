@@ -1,9 +1,15 @@
 class Settings extends Phaser.Scene {
+    constructor() {
+        super("settings")
+        this.bgIconX = 900
+        this.bgIconY = 200
+    }
+
     setDefault() {
-        this.volumeIconBg = this.add.image(this.bgIconX, this.bgIconY, 'volumeIcon', getIdxVolumeIcon('bg')).setInteractive();
+        this.volumeIconBg = this.add.image(this.bgIconX, this.bgIconY, 'spritesheet:volume', getIdxVolumeIcon('bg')).setInteractive();
         this.volumeIconBg.setScale(0.4)
 
-        this.volumeIconFg = this.add.image(this.bgIconX, this.bgIconY+200, 'volumeIcon2', getIdxVolumeIcon('fg')).setInteractive();
+        this.volumeIconFg = this.add.image(this.bgIconX, this.bgIconY+200, 'spritesheet:volume', getIdxVolumeIcon('fg')).setInteractive();
         this.volumeIconFg.setScale(0.4)
 
         let txtMusic = this.add.text(this.bgIconX-300, this.bgIconY-25, 'Music', {font: "bold 50px Arial"})
@@ -13,42 +19,15 @@ class Settings extends Phaser.Scene {
         txtSound.setTint(0x212529);
     }
 
-    constructor() {
-        super("settings")
-        this.backBtn;
-        this.clickSound;
-        this.data;
-
-        this.txt_bgVolume;
-        this.txt_fgVolume;
-        this.volumeIcon;
-        this.reloadClick;
-
-        this.bgIconX = 900
-        this.bgIconY = 200
-
-        this.loop;
-    }
-
     preload() {
         this.cameras.main.setBackgroundColor('#ead9a7');
-        this.load.spritesheet('volumeIcon', './Assets/Icon/volume(256X256).png', {
-            frameWidth: 256, 
-            frameHeight: 256
-        })
-        this.load.spritesheet('volumeIcon2', './Assets/Icon/volume(256X256).png', {
-            frameWidth: 256, 
-            frameHeight: 256
-        })
-        this.load.image("btnBackSet", './Assets/button/backBtn.png');
-        this.load.audio('clickSet', './Assets/music/click.wav');
     }
 
     create() {
-        this.btnBack = this.add.image(130, 80, "btnBackSet").setInteractive();
+        this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
         this.btnBack.setScale(0.6)
 
-        this.clickSound = SoundAdd(this, 'clickSet', JSON['volume']['fg'], false);
+        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
         
         this.setDefault()
 
@@ -58,7 +37,7 @@ class Settings extends Phaser.Scene {
     }
 
     update() {
-        btnEvent([this.btnBack], this.clickSound)
+        btnEvent([this.btnBack], this.clickSound, 0xffff0f)
 
         this.btnBack.on('pointerdown', () => {
             clearInterval(this.loop);

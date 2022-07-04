@@ -1,12 +1,15 @@
-function btnEvent(allBtn, clickVar) {
+function btnEvent(allBtn, clickVar, color) {
     allBtn.forEach(btn => {
         btn.on('pointerdown', () => {
             clickVar.play();
-            setCursor('default')
+            if (color === 0xffff0f) {
+                setCursor('default')
+            }
+            
         });
 
         btn.on('pointerover', () => {
-            btn.setTint(0xffff0f);
+            btn.setTint(color);
             game.canvas.style.cursor = "pointer";
         });
 

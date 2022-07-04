@@ -33,6 +33,8 @@
     
     <script src="./Scenes/shop/shop.js"></script>
 
+    <script src="./Scenes/menu/index.js"></script>
+
     <script src="./Scenes/settings/settings.js"></script>
 
     <script src="./Scenes/home.js"></script>
@@ -43,9 +45,10 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Company, Begin, Home, Settings, Shop],
+            // scene: [Company, Begin, Home, Settings, Shop],
             //scene: [Settings],
-            //scene: [Shop],
+            //scene: [Menu],
+            scene: [Company, Begin, Home, Settings, Shop, Menu],
             physics: {
                 default: 'arcade',
                 arcade: {

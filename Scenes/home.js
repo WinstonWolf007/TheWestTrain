@@ -1,48 +1,25 @@
 class Home extends Phaser.Scene {
     constructor() {
         super('home');
-
-        this.title;
-        this.startBtn;
-        this.settingsBtn;
-
-        this.icon1;
-        this.icon2;
-        this.icon3;
-
-        this.bgSound;
-        this.clickSound;
     }
 
     preload() {
         // set begin value
         this.cameras.main.fadeIn(1000, 0, 0, 0);
         this.cameras.main.setBackgroundColor('#ead9a7');
-
-        this.load.spritesheet('basement', './Assets/basement/animation.png', {
-            frameWidth: 750, 
-            frameHeight: 600
-        })
-    
-        this.load.image('title', './Assets/map-menu/menuTitle.png');
-        this.load.image('start', './Assets/button/startBtn.png');
-        this.load.image('settings', './Assets/button/settingsBtn.png');
-
-        this.load.audio('music', './Assets/music/countryboy.mp3');
-        this.load.audio('click', './Assets/music/click.wav');
     }
     
     create() {
         // music load
-        this.bgSound = SoundAdd(this, 'music', JSON['volume']['bg'], true);
+        this.bgSound = SoundAdd(this, 'music:countryboy', JSON['volume']['bg'], true);
         this.bgSound.play();
 
-        this.clickSound = SoundAdd(this, 'click', JSON['volume']['fg'], false);
+        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
 
         // --------------- back ---------------
-        this.icon1 = this.add.image(200, 500, 'basement', 0);
-        this.icon2 = this.add.image(1300, 700, 'basement', 2);
-        this.icon3 = this.add.image(1200, 300, 'basement', 4);
+        this.icon1 = this.add.image(200, 500, 'spritesheet:basements', 0);
+        this.icon2 = this.add.image(1300, 700, 'spritesheet:basements', 2);
+        this.icon3 = this.add.image(1200, 300, 'spritesheet:basements', 4);
         
         // change size
         [this.icon1, this.icon2, this.icon3].forEach(icons => {
@@ -50,9 +27,9 @@ class Home extends Phaser.Scene {
         });
         
         // --------------- front --------------- //
-        this.title = this.add.image(750, 100, 'title');
-        this.startBtn = this.add.image(750, 500, 'start').setInteractive();
-        this.settingsBtn = this.add.image(750, 700, 'settings').setInteractive();
+        this.title = this.add.image(750, 100, 'image:menuTitle');
+        this.startBtn = this.add.image(750, 500, 'image:startBtn').setInteractive();
+        this.settingsBtn = this.add.image(750, 700, 'image:settingsBtn').setInteractive();
 
         //  change size
         this.title.setScale(0.8);
@@ -62,7 +39,8 @@ class Home extends Phaser.Scene {
             this.bgSound.stop();
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             setTimeout(() => {
-                this.scene.start('shop');
+                this.scene.start('menu');
+                this.scene.stop('home')
             }, 1000);
         })
 
@@ -72,7 +50,7 @@ class Home extends Phaser.Scene {
     }
 
     update() {
-        btnEvent([this.startBtn, this.settingsBtn], this.clickSound)
+        btnEvent([this.startBtn, this.settingsBtn], this.clickSound, 0xffff0f)
     }
 }
 

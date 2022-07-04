@@ -1,11 +1,9 @@
 class Company extends Phaser.Scene {
     constructor() {
         super('licence');
-        this.indicText;
         this.finishWrite = false;
         this.change = false;
         this.end = false;
-        this.neon;
     }
 
     create() {
@@ -14,6 +12,9 @@ class Company extends Phaser.Scene {
         this.add.text(100, 120, '{ Music }', {fontSize: 45})
         this.add.text(100, 180, '* [countryboy.mp3]\n* [deepblue.mp3]\n* [funkysuspense.mp3]\n* [psychedelic.mp3]', {fontSize: 30})
         this.add.text(100, 330, 'https://www.bensound.com/', {fontSize: 30})
+
+        this.add.text(100, 315, 'Music "drone-9708.mp3" by ZakharValaha from Pixabay')
+        //Music by ZakharValaha from Pixabay
 
         this.add.text(100, 420, '{ Sound }', {fontSize: 45})
         this.add.text(100, 480, '* [Typewriter soft click.wav]\n* [Cool interface click tone.wav]', {fontSize: 30})
