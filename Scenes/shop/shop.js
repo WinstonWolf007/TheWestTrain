@@ -32,10 +32,7 @@ class Shop extends Phaser.Scene {
         });
 
         this.bgBar.anims.play('iddle');
-    }
 
-    update() {
-        
         btnEvent([this.btnBack], this.clickSound, 0xffff0f)
 
         // ----------------- Event ---------- //
@@ -43,6 +40,6 @@ class Shop extends Phaser.Scene {
             this.barSound.stop();
             this.scene.start('menu');
             this.scene.stop('shop');
-        })
+        });
     }
 }

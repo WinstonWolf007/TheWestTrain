@@ -29,18 +29,28 @@ class Menu extends Phaser.Scene {
         
     }
 
+    callback() {
+        this.reloadClick = true;
+    }
+
+
+    preload() {
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+    }
+
     create() {
         this.physics.pause()
+        this.timer = setInterval(() => {
+            this.callback();
+        }, 100)
 
         // -------------- Music + Sound ------------- //
         this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
         this.bgMusic = SoundAdd(this, 'music:drone-9708', JSON['volume']['bg'], true);
         this.bizzSound = SoundAdd(this, 'sound:electricity', JSON['volume']['fg'], false);
-        this.smallBizzSound = SoundAdd(this, 'sound:smallElectricity', JSON['volume']['fg'], false)
-        this.metalEchoSound = SoundAdd(this, 'sound:metalEcho', JSON['volume']['fg'], false)
-        this.metalHardSound = SoundAdd(this, 'sound:metalHard', JSON['volume']['fg'], false)
-
-        this.bgMusic.play()
+        this.smallBizzSound = SoundAdd(this, 'sound:smallElectricity', JSON['volume']['fg'], false);
+        
+        this.bgMusic.play();
 
         // --------------- Animation --------------- // 
         this.anims.create({
@@ -71,84 +81,60 @@ class Menu extends Phaser.Scene {
         });
 
         this.SetLightBtn(0);
+        
+        
 
-        // this.timer = this.time.addEvent({
-        //     delay: 200,           
-        //     callback: this.callback,
-        //     loop: true
-        // });
-        this.timer = setInterval(() => {
-            this.callback()
-        }, 100)
-    }
+        btnEvent([this.iconChestCode, this.btnShop, this.btnMap, this.btnInfo], this.clickSound, 0xf0ffff);
+        
 
-    callback() {
-        this.reloadClick = true;
-        console.log('True')
+        this.btnShop.on('pointerdown', () => {
+            if (this.lightOpen) {
+                clearInterval(this.timer);
+                this.lightOpen = false;
+                this.bgMusic.stop();
+                this.scene.start('shop');
+                this.scene.stop('menu');
+            }
+        })
+
+        this.iconScreenData.on('pointerdown', () => {
+            if (this.reloadClick && this.lightOpen) {
+                this.reloadClick = false;
+                let el = [this.bizzSound, this.smallBizzSound][Math.floor(Math.random() * 2)];
+                el.play();
+            }
+        })
+    
+        this.iconScreenTitle.on('pointerdown', () => {
+            if (this.reloadClick && this.lightOpen) {
+                this.reloadClick = false;
+                let el = [this.bizzSound, this.smallBizzSound][Math.floor(Math.random() * 2)];
+                el.play();
+            }
+        })
     }
 
     update() {
-        btnEvent([this.iconLightBtn], this.clickSound, 0xf0ffff)
-
-        if (this.lightOpen) {
-            this.iconScreenData.anims.play("animsScreenData", true);
-            this.iconScreenTitle.anims.play('animsScreenTitle', true);
-
-            btnEvent([
-                this.iconChestCode,
-                this.btnShop,
-                this.btnMap, 
-                this.btnInfo],
-            this.clickSound, 0xf0ffff)
-
-            this.btnShop.on('pointerdown', () => {
-                //this.timer.remove();
-                clearInterval(this.timer)
-                this.bgMusic.stop()
-                this.lightOpen = false;
-                this.scene.start('shop')
-                this.scene.stop('menu')
-            })
-            this.iconScreenData.on('pointerdown', () => {
-                if (this.reloadClick) {
-                    this.reloadClick = false;
-                    let el = [this.bizzSound, this.smallBizzSound][Math.floor(Math.random() * 2)];
-                    console.log(el)
-                    el.play();
-                }
-            })
-    
-            this.iconScreenTitle.on('pointerdown', () => {
-                if (this.reloadClick) {
-                    this.reloadClick = false;
-                    let el = [this.bizzSound, this.smallBizzSound][Math.floor(Math.random() * 2)];
-                    console.log(el)
-                    el.play();
-                }
-            })
-        }
-        
-        
         this.iconLightBtn.on('pointerdown', () => {
             if (this.reloadClick) {
                 this.reloadClick = false;
+                this.iconLightBtn.destroy();
+                this.clickSound.play()
+
 
                 if (this.lightOpen) {
                     this.lightOpen = false;
-                    this.iconLightBtn.destroy();
                     this.SetLightBtn(0);
-                } 
-                
-                else {
-                    this.lightOpen = true;
-                    this.iconLightBtn.destroy();
+                } else {
+                    this.lightOpen = true;  
                     this.SetLightBtn(1);
                 }
             }
         })
 
-
         if (this.lightOpen) {
+            this.iconScreenData.anims.play("animsScreenData", true);
+            this.iconScreenTitle.anims.play('animsScreenTitle', true);
             this.ChangeColorAll(true);
         } else {
             this.ChangeColorAll(false);

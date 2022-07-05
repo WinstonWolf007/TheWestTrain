@@ -44,9 +44,7 @@ class Home extends Phaser.Scene {
         this.settingsBtn.on('pointerdown', () => {
             this.scene.start('settings');
         })
-    }
 
-    update() {
         btnEvent([this.startBtn, this.settingsBtn], this.clickSound, 0xffff0f)
     }
 }
