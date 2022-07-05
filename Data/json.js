@@ -8,6 +8,6 @@ const PARAM_volume = [
 let JSON = {
     'volume': {
         'bg': 0.6,
-        'fg': 1
+        'fg': 0
     }
 }

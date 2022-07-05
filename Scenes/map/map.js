@@ -57,5 +57,17 @@ class Map extends Phaser.Scene {
 
     create() {
         this.getGraf(30)
+
+        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
+
+        this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
+        this.btnBack.setScale(0.6)
+
+        btnEvent([this.btnBack], this.clickSound, 0xffff0f)
+
+        this.btnBack.on('pointerdown', () => {
+            this.scene.start('menu');
+            this.scene.stop('map');
+        });
     }
 }
