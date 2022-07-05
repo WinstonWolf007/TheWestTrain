@@ -1,22 +1,22 @@
 # Src: Sound / Img / code
 ---
 
-### Sound / Music
+## Sound / Music
 
-* countryboy.mp3
-* deepblue.mp3
-* funkysuspense.mp3
-* psychedelic.mp3
+* The certificate in each music folder (./Assets/music/(...)/music.mp3)
+-
+### Music by Coma-Media from Pixabay
+* chill-abstract-intention-12099.mp3
 
-https://www.bensound.com/
+### MUsic by Zakharvalaha from Pixabay
+* my-life-main-6670.mp3
+* drone-9708.mp3
+* beyond-the-time-main-7425.mp3
 
- * click.wav
-
-https://mixkit.co/free-sound-effects/click/
-
+https://pixabay.com/music/
 ---
 
-### Img
+## Img
 
  * I drew all :DD
  
