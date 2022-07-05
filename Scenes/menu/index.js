@@ -115,7 +115,7 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-        this.iconLightBtn.on('pointerdown', () => {
+        this.iconLightBtn.on('pointerup', () => {
             if (this.reloadClick) {
                 this.reloadClick = false;
                 this.iconLightBtn.destroy();
