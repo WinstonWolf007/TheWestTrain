@@ -12,3 +12,5 @@ function updateVolume(types) {
 
     JSON['volume'][types] = PARAM_volume[equ]
 }
+
+

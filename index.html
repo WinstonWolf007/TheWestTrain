@@ -27,9 +27,11 @@
     <script src="./DefaultScript/volume.js"></script>
 
     <!-- All scenes game -->
+    <script src="./Scenes/BeginGame/load.js"></script>
+
     <script src="./Scenes/BeginGame/licence.js"></script>
 
-    <script src="./Scenes/BeginGame/company.js"></script>
+    <!-- <script src="./Scenes/BeginGame/company.js"></script> -->
     
     <script src="./Scenes/shop/shop.js"></script>
 
@@ -48,7 +50,8 @@
             // scene: [Company, Begin, Home, Settings, Shop],
             //scene: [Settings],
             //scene: [Menu],
-            scene: [Company, Begin, Home, Settings, Shop, Menu],
+            //scene: [Load, Company, Begin, Home, Settings, Shop, Menu],
+            scene: [Load, Company, Home, Settings, Shop, Menu],
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -59,10 +62,6 @@
             audio: {
                 disableWebAudio: true
             },
-            fps: {
-                target: 60,
-                forceSetTimeOut: false
-            }
         };
 
         game = new Phaser.Game(config);

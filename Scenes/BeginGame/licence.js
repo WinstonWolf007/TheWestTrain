@@ -28,30 +28,30 @@ class Company extends Phaser.Scene {
 
     update() {
         if (this.input.keyboard.addKey('SPACE').isDown) {
-            clearInterval(this.neon)
+            //clearInterval(this.neon)
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             setTimeout(() => {
-                this.scene.start('company');
+                this.scene.start('home');
                 this.scene.stop('licence')
             }, 1000);
         }
 
-        if (this.finishWrite) {
-            const safeText = this.indicText.text;
-            this.finishWrite = false;
+        // if (this.finishWrite) {
+        //     const safeText = this.indicText.text;
+        //     this.finishWrite = false;
 
-            this.neon = setInterval(() => {
-                if (this.change) {
-                    this.change = false;
-                    this.indicText.text = ''
-                } else {
-                    this.change = true;
-                    this.indicText.text = safeText
-                }
-            }, 500)
+        //     this.neon = setInterval(() => {
+        //         if (this.change) {
+        //             this.change = false;
+        //             this.indicText.text = ''
+        //         } else {
+        //             this.change = true;
+        //             this.indicText.text = safeText
+        //         }
+        //     }, 500)
 
-            this.indicText.text = safeText;
-        }
+        //     this.indicText.text = safeText;
+        // }
     }
 
     typewriteText(text) {
