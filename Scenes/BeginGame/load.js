@@ -35,6 +35,7 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('spritesheet:menuBtn', './Assets/button/menuBtn(168x72).png', {frameWidth: 168,frameHeight: 72});
         this.load.spritesheet('spritesheet:volume', './Assets/Icon/volume(256X256).png', {frameWidth: 256, frameHeight: 256})
         this.load.spritesheet("spritesheet:shop", './Assets/map-menu/shop.png', {frameWidth: 1200,frameHeight: 736});
+        this.load.spritesheet("spritesheet:map", './Assets/map-menu/BG_map_(1000x1000).png', {frameWidth: 1000,frameHeight: 1000});
         
         // bar
         var progressBar = this.add.graphics();

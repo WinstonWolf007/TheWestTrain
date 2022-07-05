@@ -35,6 +35,8 @@
     
     <script src="./Scenes/shop/shop.js"></script>
 
+    <script src="./Scenes/map/map.js"></script>
+
     <script src="./Scenes/menu/index.js"></script>
 
     <script src="./Scenes/settings/settings.js"></script>
@@ -47,15 +49,12 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            // scene: [Company, Begin, Home, Settings, Shop],
-            //scene: [Settings],
-            //scene: [Menu],
-            //scene: [Load, Company, Begin, Home, Settings, Shop, Menu],
-            scene: [Load, Company, Home, Settings, Shop, Menu],
+            scene: [Load, Company, Home, Settings, Shop, Menu, Map],
+            //scene: [Load, Map],
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 1 },
+                    gravity: { y: 0 },
                     debug: false
                 }
             },

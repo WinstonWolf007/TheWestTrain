@@ -29,6 +29,16 @@ class Menu extends Phaser.Scene {
         
     }
 
+    startScene(name) {
+        if (this.lightOpen) {
+            clearInterval(this.timer);
+            this.lightOpen = false;
+            this.bgMusic.stop();
+            this.scene.start(name);
+            this.scene.stop('menu');
+        }
+    }
+
     callback() {
         this.reloadClick = true;
     }
@@ -88,13 +98,11 @@ class Menu extends Phaser.Scene {
         
 
         this.btnShop.on('pointerdown', () => {
-            if (this.lightOpen) {
-                clearInterval(this.timer);
-                this.lightOpen = false;
-                this.bgMusic.stop();
-                this.scene.start('shop');
-                this.scene.stop('menu');
-            }
+            this.startScene('shop');
+        })
+
+        this.btnMap.on('pointerdown', () => {
+            this.startScene('map');
         })
 
         this.iconScreenData.on('pointerdown', () => {
