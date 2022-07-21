@@ -12,12 +12,23 @@ class Load extends Phaser.Scene {
         this.load.audio('sound:smallElectricity', './Assets/music/mixkit-small-electric-glitch-2595.wav');
         this.load.audio('sound:metalEcho', './Assets/music/mixkit-factory-hit-with-echo-2983.wav');
         this.load.audio('sound:metalHard', './Assets/music/mixkit-factory-metal-hard-hit-2980.wav');
-
+        this.load.audio('sound:gunShot1', './Assets/music/battle/gunSound/mixkit-blast-hit-with-echo-2186.wav')
+        this.load.audio('sound:gunShot2', './Assets/music/battle/gunSound/mixkit-game-gun-shot-1662.mp3')
+        this.load.audio('sound:gunShot3', './Assets/music/battle/gunSound/mixkit-impact-of-a-blow-2150.wav')
+        this.load.audio('sound:gunShot4', './Assets/music/battle/gunSound/mixkit-laser-weapon-shot-1681.wav')
+        this.load.audio('sound:fastHeart', './Assets/music/battle/health/mixkit-fast-heartbeat-493.wav')
+        this.load.audio('sound:slowHeart', './Assets/music/battle/health/mixkit-slow-heartbeat-494.wav')
+        this.load.audio('sound:reloadGun1', './Assets/music/battle/reloadGun/mixkit-handgun-movement-1668.wav')
+        this.load.audio('sound:reloadGun2', 'Assets/music/battle/reloadGun/mixkit-revolver-chamber-spin-1674.wav')
+        this.load.audio('sound:reloadGun3', './Assets/music/battle/reloadGun/mixkit-shotgun-hard-pump-1665.wav')
+        this.load.audio('sound:reloadGun4', './Assets/music/battle/reloadGun/mixkit-shotgun-long-pump-1666.wav')
 
         // MUSIC //
         this.load.audio('music:chill-abstract-intention', './Assets/music/Bar/chill-abstract-intention-12099.mp3');
         this.load.audio('music:drone-9708', './Assets/music/Menu/drone-9708.mp3');
         this.load.audio("music:my-life-main", './Assets/music/Home/my-life-main-6670.mp3');
+        this.load.audio('sound:aspire', './Assets/music/battle/1/aspire-111789.mp3')
+        this.load.audio('sound:irreducible', './Assets/music/battle/2/irreducible-111374.mp3')
 
         // IMAGE //
         this.load.image('image:menuTitle', './Assets/map-menu/menuTitle.png');
