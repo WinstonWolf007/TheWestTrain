@@ -9,9 +9,9 @@ class Load extends Phaser.Scene {
         this.load.audio('sound:click', './Assets/music/click.wav');
         this.load.audio('sound:electricity', './Assets/music/electricity.wav');
         this.load.audio('sound:casset', './Assets/music/mixkit-cassette-player-2556.wav');
-        this.load.audio('sound:smallElectricity', './Assets/music/mixkit-small-electric-glitch-2595.wav')
-        this.load.audio('sound:metalEcho', './Assets/music/mixkit-factory-hit-with-echo-2983.wav')
-        this.load.audio('sound:metalHard', './Assets/music/mixkit-factory-metal-hard-hit-2980.wav')
+        this.load.audio('sound:smallElectricity', './Assets/music/mixkit-small-electric-glitch-2595.wav');
+        this.load.audio('sound:metalEcho', './Assets/music/mixkit-factory-hit-with-echo-2983.wav');
+        this.load.audio('sound:metalHard', './Assets/music/mixkit-factory-metal-hard-hit-2980.wav');
 
 
         // MUSIC //
@@ -30,7 +30,7 @@ class Load extends Phaser.Scene {
         this.load.image("image:money3", "./Assets/Icon/money3.png")
 
         // SPRITESHEET //
-        this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600})
+        this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600});
         this.load.spritesheet('spritesheet:menuChest', './Assets/Icon/menuChest(264x408).png', {frameWidth: 264,frameHeight: 408});
         this.load.spritesheet('spritesheet:menuLight', './Assets/Icon/menuLight(168x344).png', {frameWidth: 168,frameHeight: 344});
         this.load.spritesheet('spritesheet:menuScreenData', './Assets/Icon/menuScreenData(520x184).png', {frameWidth: 520,frameHeight: 184});
@@ -39,7 +39,11 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('spritesheet:volume', './Assets/Icon/volume(256X256).png', {frameWidth: 256, frameHeight: 256})
         this.load.spritesheet("spritesheet:shop", './Assets/map-menu/shop.png', {frameWidth: 1200,frameHeight: 736});
         this.load.spritesheet("spritesheet:map", './Assets/map-menu/BG_map_(1000x1000).png', {frameWidth: 1000,frameHeight: 1000});
-        this.load.spritesheet("spritesheet:empty", './Assets/plant/empty.png', {frameWidth: 750, frameHeight: 600})
+        this.load.spritesheet("spritesheet:empty", './Assets/plant/empty.png', {frameWidth: 750, frameHeight: 600});
+        this.load.spritesheet("spritesheet:battleMap", "./Assets/map-menu/battleMap(1500X920).png", {frameWidth: 1500, frameHeight: 920});
+        this.load.spritesheet("spritesheet:battleEntity", "./Assets/entity/battleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
+        this.load.spritesheet("spritesheet:deathEntity", "./Assets/entity/deathEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
+
 
         // bar
         var progressBar = this.add.graphics();
@@ -62,6 +66,7 @@ class Load extends Phaser.Scene {
 
     create() {
         //this.scene.start('licence')
-        this.scene.start('shop')
+        //this.scene.start('shop');
+        this.scene.start('battle');
     }
 }

@@ -38,15 +38,17 @@
     <script src="./DefaultScript/volume.js"></script>
 
     <!-- All scenes game -->
-    <script src="./Scenes/BeginGame/load.js"></script>
+    <script src="./Scenes/beginGame/load.js"></script>
 
-    <script src="./Scenes/BeginGame/licence.js"></script>
+    <script src="./Scenes/beginGame/licence.js"></script>
 
     <!-- <script src="./Scenes/BeginGame/company.js"></script> -->
     
     <script src="./Scenes/shop/shop.js"></script>
 
     <script src="./Scenes/map/map.js"></script>
+
+    <script src="./Scenes/battle/battle.js"></script>
 
     <script src="./Scenes/menu/index.js"></script>
 
@@ -60,7 +62,7 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Load, Company, Home, Settings, Shop, Menu, Map],
+            scene: [Load, Company, Home, Settings, Shop, Menu, Map, Battle],
             //scene: [Load, Map],
             physics: {
                 default: 'arcade',
