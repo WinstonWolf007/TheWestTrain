@@ -29,9 +29,9 @@ class Map extends Phaser.Scene {
                     case 2:
                         img = this.add.image(pos[0], pos[1], 'spritesheet:basements', 4)
                         break;
-                    default:
-                        img = null
-                        break;
+                    //default:
+                        //img = this.add.image(pos[0], pos[1], 'spritesheet:empty', Math.floor(Math.random() * 7))
+                        //break;
                 }
 
                 if (img != null) {

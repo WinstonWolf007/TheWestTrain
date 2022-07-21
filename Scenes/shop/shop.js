@@ -23,6 +23,22 @@ class Shop extends Phaser.Scene {
         this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
         this.btnBack.setScale(0.6)
 
+        let moneyWidth = this.textures['list']['image:money2']['source']['0']['width'];
+        let centerMoneyX = (1500-moneyWidth)/2;
+
+        this.moneyIcon = this.add.image(centerMoneyX, 80, "image:money2").setInteractive();
+        this.moneyIcon.setScale(0.6);
+        
+        if (money > 999) {
+            let moneyTxt = '999+';
+            this.moneyText = this.add.text(centerMoneyX+25, 55, moneyTxt, {fontSize: 70, fontFamily: 'pixelMoney'})
+        }
+        else {
+            this.moneyText = this.add.text(centerMoneyX+25, 55, money, {fontSize: 70, fontFamily: 'pixelMoney'});
+        }
+        
+        this.moneyText.setTint(0xb47d58);
+
         // -------------- Animation -------------- //
         this.anims.create({
             key: 'iddle',

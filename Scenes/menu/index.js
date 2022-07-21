@@ -125,9 +125,10 @@ class Menu extends Phaser.Scene {
     update() {
         this.iconLightBtn.on('pointerup', () => {
             if (this.reloadClick) {
+                this.clickSound.play()
                 this.reloadClick = false;
                 this.iconLightBtn.destroy();
-                this.clickSound.play()
+                
 
 
                 if (this.lightOpen) {

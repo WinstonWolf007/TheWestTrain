@@ -25,6 +25,9 @@ class Load extends Phaser.Scene {
         this.load.image('image:settingsBtn', './Assets/button/settingsBtn.png');
         this.load.image('image:bgMenu', './Assets/map-menu/bgMenu.png');
         this.load.image("image:backBtn", './Assets/button/backBtn.png');
+        this.load.image("image:money1", "./Assets/Icon/money1.png")
+        this.load.image("image:money2", "./Assets/Icon/money2.png")
+        this.load.image("image:money3", "./Assets/Icon/money3.png")
 
         // SPRITESHEET //
         this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600})
@@ -36,7 +39,8 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('spritesheet:volume', './Assets/Icon/volume(256X256).png', {frameWidth: 256, frameHeight: 256})
         this.load.spritesheet("spritesheet:shop", './Assets/map-menu/shop.png', {frameWidth: 1200,frameHeight: 736});
         this.load.spritesheet("spritesheet:map", './Assets/map-menu/BG_map_(1000x1000).png', {frameWidth: 1000,frameHeight: 1000});
-        
+        this.load.spritesheet("spritesheet:empty", './Assets/plant/empty.png', {frameWidth: 750, frameHeight: 600})
+
         // bar
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -57,6 +61,7 @@ class Load extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start('licence')
+        //this.scene.start('licence')
+        this.scene.start('shop')
     }
 }

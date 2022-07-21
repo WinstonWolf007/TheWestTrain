@@ -1,0 +1,35 @@
+Western: 1$
+
+============== 
+
+Now: 22$
+
+
+
++critical > 30%
++damage   > 5
++bullet   > 3
+
+=critical > 25%
+=damage   > 4
+=bullet   > 3
+
+-critical > 15%
+-damage   > 3
+-bullet   > 1
+
+Gun: 30$
+
+=damage   =bullet   +critical
+
+shotgun: 35$
+
+=critical -bullet  +damage
+
+sniper: 40$
+
+=critical -damage   +bullet
+
+pistol (+speed) => {"speed": 0.5, "damage": 2, "bullet": 5} -> more speed attack
+  * shotgun (+damage) => {"speed": 1.5, "damage": 5, "bullet": 2} -> more damage
+  * machine gun (+bullet) => {"speed": 1, "damage": "3", "bullet": 24} -> shoot 3 bullets (1 damage each bullet * 3) to each attack > 8 shoots
