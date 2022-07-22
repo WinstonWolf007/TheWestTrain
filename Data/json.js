@@ -8,8 +8,10 @@ const PARAM_volume = [
 let JSON = {
     'volume': {
         'bg': 0.6,
-        'fg': 0
+        'fg': 1
     }
 }
 
-let money = 756104385623609857632
+let money = 0
+let playerHealth = 100
+let enemyHealth = 100

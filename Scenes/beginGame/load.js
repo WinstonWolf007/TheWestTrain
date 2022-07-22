@@ -12,10 +12,10 @@ class Load extends Phaser.Scene {
         this.load.audio('sound:smallElectricity', './Assets/music/mixkit-small-electric-glitch-2595.wav');
         this.load.audio('sound:metalEcho', './Assets/music/mixkit-factory-hit-with-echo-2983.wav');
         this.load.audio('sound:metalHard', './Assets/music/mixkit-factory-metal-hard-hit-2980.wav');
-        this.load.audio('sound:gunShot1', './Assets/music/battle/gunSound/mixkit-blast-hit-with-echo-2186.wav')
-        this.load.audio('sound:gunShot2', './Assets/music/battle/gunSound/mixkit-game-gun-shot-1662.mp3')
-        this.load.audio('sound:gunShot3', './Assets/music/battle/gunSound/mixkit-impact-of-a-blow-2150.wav')
-        this.load.audio('sound:gunShot4', './Assets/music/battle/gunSound/mixkit-laser-weapon-shot-1681.wav')
+        this.load.audio('sound:gunShoot1', './Assets/music/battle/gunSound/mixkit-blast-hit-with-echo-2186.wav')
+        this.load.audio('sound:gunShoot2', './Assets/music/battle/gunSound/mixkit-game-gun-shot-1662.mp3')
+        this.load.audio('sound:gunShoot3', './Assets/music/battle/gunSound/mixkit-impact-of-a-blow-2150.wav')
+        this.load.audio('sound:gunShoot4', './Assets/music/battle/gunSound/mixkit-laser-weapon-shot-1681.wav')
         this.load.audio('sound:fastHeart', './Assets/music/battle/health/mixkit-fast-heartbeat-493.wav')
         this.load.audio('sound:slowHeart', './Assets/music/battle/health/mixkit-slow-heartbeat-494.wav')
         this.load.audio('sound:reloadGun1', './Assets/music/battle/reloadGun/mixkit-handgun-movement-1668.wav')
@@ -27,8 +27,8 @@ class Load extends Phaser.Scene {
         this.load.audio('music:chill-abstract-intention', './Assets/music/Bar/chill-abstract-intention-12099.mp3');
         this.load.audio('music:drone-9708', './Assets/music/Menu/drone-9708.mp3');
         this.load.audio("music:my-life-main", './Assets/music/Home/my-life-main-6670.mp3');
-        this.load.audio('sound:aspire', './Assets/music/battle/1/aspire-111789.mp3')
-        this.load.audio('sound:irreducible', './Assets/music/battle/2/irreducible-111374.mp3')
+        this.load.audio('music:aspire', './Assets/music/battle/1/aspire-111789.mp3')
+        this.load.audio('music:irreducible', './Assets/music/battle/2/irreducible-111374.mp3')
 
         // IMAGE //
         this.load.image('image:menuTitle', './Assets/map-menu/menuTitle.png');
@@ -54,7 +54,7 @@ class Load extends Phaser.Scene {
         this.load.spritesheet("spritesheet:battleMap", "./Assets/map-menu/battleMap(1500X920).png", {frameWidth: 1500, frameHeight: 920});
         this.load.spritesheet("spritesheet:battleEntity", "./Assets/entity/battleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:deathEntity", "./Assets/entity/deathEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
-
+        this.load.spritesheet("spritesheet:iddleEntity", "./Assets/entity/iddleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
 
         // bar
         var progressBar = this.add.graphics();
@@ -63,10 +63,9 @@ class Load extends Phaser.Scene {
         progressBox.fillRect(240, 270, 320, 50);
 
         this.load.on('progress', function (value) {
-                progressBar.clear();
+            progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(250, 280, 300 * value, 30);
-            
         });
                     
         this.load.on('complete', function () {
