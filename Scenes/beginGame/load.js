@@ -24,6 +24,7 @@ class Load extends Phaser.Scene {
         //this.load.audio('sound:reloadGun4', './Assets/music/battle/reloadGun/mixkit-shotgun-long-pump-1666.wav')
         this.load.audio('sound:321', './Assets/music/battle/time/321.wav')
         this.load.audio('sound:go', './Assets/music/battle/time/go.wav')
+        this.load.audio('sound:badShoot', './Assets/music/battle/gunSound/mixkit-falling-into-mud-surface-385.wav')
 
         // MUSIC //
         //this.load.audio('music:chill-abstract-intention', './Assets/music/Bar/chill-abstract-intention-12099.mp3');
