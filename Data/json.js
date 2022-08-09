@@ -8,14 +8,16 @@ const PARAM_volume = [
 let JSON = {
     'volume': {
         'bg': 0.3,
-        'fg': 1
+        'fg': 0.6
     }
 }
 
-let money = 0
+let money = 1000
 let playerHealth = 100
 let enemyHealth = 100
 
+let ItemsShopMoney = [5, 5, 5]
+let ItemsShopCapacity = [1, 1, 1]
 
 let map = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

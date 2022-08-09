@@ -32,7 +32,7 @@ class Settings extends Phaser.Scene {
 
     create() {
         // ---------- Music + Sound ---------- //
-        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
+        this.clickSound = SoundAdd(this, 'sound:click', false);
 
         // -------------- Front -------------- //
         this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();

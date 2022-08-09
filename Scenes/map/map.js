@@ -58,7 +58,7 @@ class Map extends Phaser.Scene {
     create() {
         this.getGraf(30)
 
-        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
+        this.clickSound = SoundAdd(this, 'sound:click', false);
 
         this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
         this.btnBack.setScale(0.6)

@@ -8,6 +8,16 @@ class Battle extends Phaser.Scene {
     }
 
     create() {
+        // ----- Music + Sound ----- //
+        this.musicScene = SoundAdd(this, 'music:irreducible', true);
+        this.musicScene.play()
+
+        this.gunShoot2  = SoundAdd(this, 'sound:gunShoot2', false);
+        this.deathSound = SoundAdd(this, 'sound:electricity', false);
+        this.badShoot = SoundAdd(this, 'sound:badShoot', false);
+
+        this.sGo2 = SoundAdd(this, 'sound:gunShoot1', false, 0.2);
+        
         // ----- Key code ----- //
         this.K_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         this.K_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT)
@@ -26,13 +36,6 @@ class Battle extends Phaser.Scene {
 
         // ----- Game ----- //
         this.gameLoad = false
-
-        // ----- Music + Sound ----- //
-        SoundAdd(this, 'music:irreducible', true).play();
-
-        this.gunShoot2  = SoundAdd(this, 'sound:gunShoot2', false);
-        this.deathSound = SoundAdd(this, 'sound:electricity', false);
-        this.badShoot = SoundAdd(this, 'sound:badShoot', false);
 
         // ----- Image ----- //
         this.map          = this.physics.add.sprite(0, 0, 'spritesheet:battleMap').setOrigin(0, 0);
@@ -113,7 +116,7 @@ class Battle extends Phaser.Scene {
         this.iddleE.play('iddleE');
 
         // ----- Txt ----- //
-        this.infoTxt = this.add.text(380, 200, '', {fontSize: 50, fontFamily: 'pixelMoney'});
+        this.infoTxt = this.add.text(450, 150, '', {fontSize: 50, fontFamily: 'pixelMoney'});
         this.timeTxt = this.add.text((1500-100)/2, 200, '', {fontSize: 100, fontFamily: 'pixelMoney'});
         
         this.titleGame = true;
@@ -122,6 +125,7 @@ class Battle extends Phaser.Scene {
 
     ShootGame() {
         this.input.keyboard.on('keydown-SPACE', () => {
+            this.spaceIsPressed = true;
             if (this.spaceLOad) {
                 if (!this.startShootGame && this.enterLoad && this.gameLoad) {
                     this.iddleP.setActive(false).setVisible(false);
@@ -166,7 +170,12 @@ class Battle extends Phaser.Scene {
     
                         this.Edeath = true;
 
-                        this.infoTxt.text = "Player Win !!"
+                        this.cameras.main.fadeOut(1000, 0, 0, 0);
+                        setTimeout(() => {
+                            this.musicScene.stop()
+                            this.scene.start('map');
+                            this.scene.stop('battle')
+                        }, 1000)
                     }
     
                     setTimeout(() => {      
@@ -179,13 +188,13 @@ class Battle extends Phaser.Scene {
                     this.gameLoad = false;
                 } 
                 setTimeout(() => {
-                    this.timeTxt.text = ""
-                    this.infoTxt.text = ""
-                    this.startShootGame = false
-                    this.titleGame = true
+                    this.timeTxt.text = "";
+                    this.startShootGame = false;
+                    this.titleGame = true;
                 }, 2000)
 
-                this.spaceLOad = false
+                this.spaceLOad = false;
+                this.spaceIsPressed = false;
             }
             
         })
@@ -194,45 +203,44 @@ class Battle extends Phaser.Scene {
     chrono() {
         // ----- Tick Sound ----- //
         this.s321 = SoundAdd(this, 'sound:321', false);
-        this.sGo = SoundAdd(this, 'sound:go', false)
 
-        // ----- Time Txt ----- //
-        this.timeTxt.text = "3"
-        this.timeTxt.setTint(0xff0000)
-        this.s321.play()
+        const time_loops = randint(3, 5);
+        let time_delay = randint(400, 1000);
+        const time_delay_2 = time_delay;
 
-        setTimeout(() => {
-            this.timeTxt.text = "2"
-            this.timeTxt.setTint(0xff0000)
-            this.s321.play()
-            setTimeout(() => {
-                this.timeTxt.text = "1"
-                this.timeTxt.setTint(0xff0000)
-                this.s321.play()
+        for(let i=time_loops; i>=0; i--) {
+            if (i>0) {
+                setTimeout(() => {
+                    this.timeTxt.text = i.toString();;
+                    this.timeTxt.setTint(0xf26419);
+                    this.s321.play()
+                }, time_delay);
+                time_delay += time_delay_2;
+            }
+            else {
                 setTimeout(() => {
                     this.startShootGame = true
-                    this.timeTxt.text = ">"
-                    this.timeTxt.setTint(0x00ff00)
-                    this.sGo.play()
-                    setTimeout(() => {
-                        this.timeTxt.text = ""
-                    }, 1000)
-                }, 1000)
-            }, 1000)
-        }, 1000)
+                    this.timeTxt.text = '>';
+                    this.timeTxt.setTint(0x758e4f);
+                }, time_delay);
+                time_delay += time_delay_2;
+                setTimeout(() => {
+                    this.timeTxt.text = '';
+                }, time_delay);
+            }
+        }
     }
 
     loadTitleGame() {
         // ----- title ----- //
         if (this.titleGame && !this.Pdeath && !this.Edeath) {
             this.infoTxt.text = "Press SHIFT button"
-            if (this.K_enter.isDown) {
-                if (!this.startShootGame) {
-                    this.infoTxt.text = "";
-                    this.chrono()
-                    this.gameLoad = true;
-                    this.titleGame = false;
-                }
+            this.infoTxt.setTint(0x834b36)
+            if (this.K_enter.isDown && !this.startShootGame) {
+                this.infoTxt.text = "";
+                this.chrono()
+                this.gameLoad = true;
+                this.titleGame = false;
             }
         } 
     }

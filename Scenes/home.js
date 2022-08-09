@@ -10,8 +10,8 @@ class Home extends Phaser.Scene {
     
     create() {
         // ---------- Music + Sound ---------- //
-        this.bgSound = SoundAdd(this, 'music:my-life-main', JSON['volume']['bg'], true);
-        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
+        this.bgSound = SoundAdd(this, 'music:my-life-main', true);
+        this.clickSound = SoundAdd(this, 'sound:click', false);
 
         this.bgSound.play();
 

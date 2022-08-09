@@ -10,34 +10,32 @@ class Shop extends Phaser.Scene {
 
     create() {
         // ---------- Music + Sound ---------- // 
-        this.barSound = SoundAdd(this, 'music:chill-abstract-intention', JSON['volume']['bg'], true);
-        this.clickSound = SoundAdd(this, 'sound:click', JSON['volume']['fg'], false);
+        this.barSound   = SoundAdd(this, 'music:chill-abstract-intention', true);
+        this.clickSound = SoundAdd(this, 'sound:click', false);
 
         this.barSound.play();
         this.physics.pause();
 
+        // --------------- Text --------------- //
+        this.moneyText    = this.add.text(0, 0, '');
+        this.txtShopIcon1 = this.add.text(0, 0, '');
+        this.txtShopIcon2 = this.add.text(0, 0, '');
+        this.txtShopIcon3 = this.add.text(0, 0, '');
+
         // --------------- Front --------------- //
-        this.bgBar = this.physics.add.sprite(750, 460, 'spritesheet:shop').setInteractive();
+        this.bgBar     = this.physics.add.sprite(750, 460, 'spritesheet:shop').setInteractive();
+        
+        this.btnBack   = this.add.image(130, 80, "image:backBtn").setInteractive();
+
+        this.shopIcon1 = this.add.image(500, 300, 'image:shopItems1').setInteractive();
+        this.shopIcon2 = this.add.image(700, 300, 'image:shopItems2').setInteractive();
+        this.shopIcon3 = this.add.image(900, 300, 'image:shopItems3').setInteractive();
+
         this.bgBar.setScale(1.25);
-        
-        this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
-        this.btnBack.setScale(0.6)
-
-        let moneyWidth = this.textures['list']['image:money2']['source']['0']['width'];
-        let centerMoneyX = (1500-moneyWidth)/2;
-
-        this.moneyIcon = this.add.image(centerMoneyX, 80, "image:money2").setInteractive();
-        this.moneyIcon.setScale(0.6);
-        
-        if (money > 999) {
-            let moneyTxt = '999+';
-            this.moneyText = this.add.text(centerMoneyX+25, 55, moneyTxt, {fontSize: 70, fontFamily: 'pixelMoney'})
-        }
-        else {
-            this.moneyText = this.add.text(centerMoneyX+25, 55, money, {fontSize: 70, fontFamily: 'pixelMoney'});
-        }
-        
-        this.moneyText.setTint(0xb47d58);
+    
+        [this.shopIcon1, this.shopIcon2, this.shopIcon3, this.btnBack].forEach(el => {
+            el.setScale(0.6)
+        })
 
         // -------------- Animation -------------- //
         this.anims.create({
@@ -49,13 +47,61 @@ class Shop extends Phaser.Scene {
 
         this.bgBar.anims.play('iddle');
 
-        btnEvent([this.btnBack], this.clickSound, 0xffff0f)
+        // ----------------- Btn Event ---------------- //
+        btnEvent([this.btnBack], this.clickSound, 0xffff0f);
+        btnEvent([this.shopIcon1, this.shopIcon2, this.shopIcon3], this.clickSound, 0xffff0f)
 
-        // ----------------- Event ---------- //
+        // ----------------- Event ----------------- //
         this.btnBack.on('pointerdown', () => {
             this.barSound.stop();
             this.scene.start('menu');
             this.scene.stop('shop');
         });
+
+        this.shopIcon1.on('pointerdown', () => {
+            if ((money-ItemsShopMoney[0]) >= 0) {
+                money -= ItemsShopMoney[0]
+                ItemsShopMoney[0] += 5
+                ItemsShopCapacity[0] += 1
+            }
+        })
+
+        this.shopIcon2.on('pointerdown', () => {
+            if ((money-ItemsShopMoney[1]) >= 0) {
+                money -= ItemsShopMoney[1]
+                ItemsShopMoney[1] += 5
+                ItemsShopCapacity[1] += 1
+            }
+        })
+
+        this.shopIcon3.on('pointerdown', () => {
+            if ((money-ItemsShopMoney[2]) >= 0) {
+                money -= ItemsShopMoney[2]
+                ItemsShopMoney[2] += 5
+                ItemsShopCapacity += 1
+            }
+        })
+    }
+
+    update() {
+        [this.txtShopIcon1, this.txtShopIcon2, this.txtShopIcon3, this.moneyText].forEach(el => {
+            el.text = ''
+        })
+        this.txtShopIcon1  = this.add.text(440, 180, '$'+ItemsShopMoney[0].toString(), {fontSize: 50, fontFamily: 'pixelMoney'})
+        this.txtShopIcon2  = this.add.text(640, 180, '$'+ItemsShopMoney[1].toString(), {fontSize: 50, fontFamily: 'pixelMoney'})
+        this.txtShopIcon3  = this.add.text(840, 180, '$'+ItemsShopMoney[2].toString(), {fontSize: 50, fontFamily: 'pixelMoney'})
+
+        this.txtShopIcons  = [this.txtShopIcon1, this.txtShopIcon2, this.txtShopIcon3]
+
+        this.txtShopIcons.forEach(el => {
+            el.setTint(0xb47d58)
+        })
+
+        if (money > 999) { 
+            this.moneyText = this.add.text(((1500-(70*5))/4)*3+200, 280, '$999+', {fontSize: 70, fontFamily: 'pixelMoney'})
+        }
+        else {
+            this.moneyText = this.add.text(((1500-(70*(money.toString().length+1)))/4)*3+200, 280, '$'+money.toString(), {fontSize: 70, fontFamily: 'pixelMoney'});
+        }
     }
 }

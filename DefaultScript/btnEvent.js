@@ -5,7 +5,6 @@ function btnEvent(allBtn, clickVar, color) {
             if (color === 0xffff0f) {
                 setCursor('default')
             }
-            
         });
 
         btn.on('pointerover', () => {
