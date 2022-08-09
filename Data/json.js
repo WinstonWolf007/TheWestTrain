@@ -12,17 +12,18 @@ let JSON = {
     }
 }
 
-let money = 1000
+let money = 40
 let playerHealth = 100
 let enemyHealth = 100
 
 let ItemsShopMoney = [25, 30, 45]
 let ItemsShopCapacity = [
-    [1, 2, 3],
-    [2, 3, 1],
-    [3, 1, 2]
+    [2, 4, 3],
+    [4, 3, 2],
+    [2, 1, 4]
 ]
 let itemsIsBuy = [false, false, false]
+let itemsSelect = 1
 
 let map = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

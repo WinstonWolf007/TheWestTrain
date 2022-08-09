@@ -12,6 +12,7 @@ class Shop extends Phaser.Scene {
         // ---------- Music + Sound ---------- // 
         this.barSound   = SoundAdd(this, 'music:chill-abstract-intention', true);
         this.clickSound = SoundAdd(this, 'sound:click', false);
+        this.buyItems   = SoundAdd(this, 'sound:buyItems', false);
 
         this.barSound.play();
         this.physics.pause();
@@ -77,11 +78,10 @@ class Shop extends Phaser.Scene {
 
         this.bgBar.anims.play('iddle');
 
-        // ----------------- Btn Event ---------------- //
+        // ----------------- Events ----------------- //
         btnEvent([this.btnBack], this.clickSound, 0xffff0f);
         btnEvent([this.shopIcon1, this.shopIcon2, this.shopIcon3], this.clickSound, 0xffff0f);
 
-        // ----------------- Event ----------------- //
         this.btnBack.on('pointerdown', () => {
             this.barSound.stop();
             this.scene.start('menu');
@@ -105,13 +105,13 @@ class Shop extends Phaser.Scene {
                 if (!itemsIsBuy[j] && (money-ItemsShopMoney[j]) >= 0) {
                     money -= ItemsShopMoney[j];
                     itemsIsBuy[j] = true;
+                    this.buyItems.play();
                 }
             })
         }
     }
 
     update() {
-        console.log(itemsIsBuy)
         this.allTxt.forEach(el => {
             el.text = '';
         })

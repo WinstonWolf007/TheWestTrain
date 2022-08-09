@@ -77,32 +77,42 @@ class Menu extends Phaser.Scene {
             repeat: 1
         });
 
-        // -------------------------- Front -------------------- //
-        this.bg = this.add.image(750, 460, 'image:bgMenu')
-        this.iconChestCode = this.add.image(850, 300, 'spritesheet:menuChest', 0).setInteractive();
-        this.iconScreenData = this.physics.add.sprite(335, 125, 'spritesheet:menuScreenData', 0).setInteractive();
+        // -------------------------- Image -------------------- //
+        this.bg              = this.add.image(750, 460, 'image:bgMenu')
+        this.iconChestCode   = this.add.image(850, 300, 'spritesheet:menuChest', 0).setInteractive();
+        this.btnShop         = this.add.image(650, 750, 'spritesheet:menuBtn', 0).setInteractive();
+        this.btnMap          = this.add.image(950, 750, 'spritesheet:menuBtn', 1).setInteractive();
+        this.btnInfo         = this.add.image(1250, 750, 'spritesheet:menuBtn', 2).setInteractive();
+
+        this.iconScreenData  = this.physics.add.sprite(335, 125, 'spritesheet:menuScreenData', 0).setInteractive();
         this.iconScreenTitle = this.physics.add.sprite(1270, 365, 'spritesheet:titleScreenData', 0).setInteractive();
-        this.btnShop = this.add.image(650, 750, 'spritesheet:menuBtn', 0).setInteractive();
-        this.btnMap = this.add.image(950, 750, 'spritesheet:menuBtn', 1).setInteractive();
-        this.btnInfo = this.add.image(1250, 750, 'spritesheet:menuBtn', 2).setInteractive();
+
+        this.btnBack         = this.add.image(130, 80, "image:backBtn").setInteractive();
 
         [this.bg, this.iconChestCode, this.iconScreenData, this.iconScreenTitle, this.btnShop, this.btnMap, this.btnInfo].forEach(items => {
             items.setScale(1.25);
         });
 
-        this.SetLightBtn(0);
-        
-        
+        this.btnBack.setScale(0.6)
 
+        // ---------- Event ---------- //
+        this.SetLightBtn(0);
+
+        btnEvent([this.btnBack], this.clickSound, 0xffff0f)
         btnEvent([this.iconChestCode, this.btnShop, this.btnMap, this.btnInfo], this.clickSound, 0xf0ffff, this);
         
-
+        this.btnBack.on('pointerdown', () => {
+            this.scene.start('home')
+            this.bgMusic.pause();
+        })
         this.btnShop.on('pointerdown', () => {
             this.startScene('shop');
+            this.bgMusic.pause()
         })
 
         this.btnMap.on('pointerdown', () => {
             this.startScene('map');
+            this.bgMusic.pause()
         })
 
         this.iconScreenData.on('pointerdown', () => {
@@ -128,8 +138,6 @@ class Menu extends Phaser.Scene {
                 this.clickSound.play()
                 this.reloadClick = false;
                 this.iconLightBtn.destroy();
-                
-
 
                 if (this.lightOpen) {
                     this.lightOpen = false;

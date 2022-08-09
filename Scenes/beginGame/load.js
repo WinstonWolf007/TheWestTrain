@@ -6,16 +6,18 @@ class Load extends Phaser.Scene {
 
     preload () {   
         // SOUND //
+        this.load.audio('sound:buyItems', './Assets/music/Bar/sound/mixkit-gold-coin-prize-1999.wav')
         this.load.audio('sound:click', './Assets/music/click.wav');
         this.load.audio('sound:electricity', './Assets/music/electricity.wav');
         this.load.audio('sound:casset', './Assets/music/mixkit-cassette-player-2556.wav');
         this.load.audio('sound:smallElectricity', './Assets/music/mixkit-small-electric-glitch-2595.wav');
         this.load.audio('sound:metalEcho', './Assets/music/mixkit-factory-hit-with-echo-2983.wav');
         this.load.audio('sound:metalHard', './Assets/music/mixkit-factory-metal-hard-hit-2980.wav');
-        this.load.audio('sound:gunShoot1', './Assets/music/battle/gunSound/mixkit-blast-hit-with-echo-2186.wav')
-        this.load.audio('sound:gunShoot2', './Assets/music/battle/gunSound/mixkit-game-gun-shot-1662.mp3')
-        this.load.audio('sound:gunShoot3', './Assets/music/battle/gunSound/mixkit-impact-of-a-blow-2150.wav')
-        this.load.audio('sound:gunShoot4', './Assets/music/battle/gunSound/mixkit-laser-weapon-shot-1681.wav')
+
+        this.load.audio('sound:gunShoot1', './Assets/music/battle/gunSound/pistolShoot.mp3')
+        this.load.audio('sound:gunShoot2', './Assets/music/battle/gunSound/miniPistolShoot.mp3')
+        this.load.audio('sound:gunShoot3', './Assets/music/battle/gunSound/bigPiatolShoot.wav')
+
         this.load.audio('sound:fastHeart', './Assets/music/battle/health/mixkit-fast-heartbeat-493.wav')
         this.load.audio('sound:slowHeart', './Assets/music/battle/health/mixkit-slow-heartbeat-494.wav')
         this.load.audio('sound:reloadGun1', './Assets/music/battle/reloadGun/mixkit-handgun-movement-1668.wav')
@@ -87,5 +89,6 @@ class Load extends Phaser.Scene {
         // this.scene.start('licence')
         this.scene.start('shop');
         //this.scene.start('battle');
+        //this.scene.start('menu')
     }
 }

@@ -8,12 +8,19 @@ class Battle extends Phaser.Scene {
     }
 
     create() {
+        // ----- Enemy Capacity ----- //
+        let enemyCapacity = {
+            'health': enemyHealth,
+            'weapon': ItemsShopCapacity[Math.floor(Math.random() * 3)]
+        }
+
         // ----- Music + Sound ----- //
         this.musicScene = SoundAdd(this, 'music:irreducible', true);
+        this.gunShoot1  = SoundAdd(this, 'sound:gunShoot1', false);
         this.gunShoot2  = SoundAdd(this, 'sound:gunShoot2', false);
+        this.gunShoot3  = SoundAdd(this, 'sound:gunShoot3', false);
         this.deathSound = SoundAdd(this, 'sound:electricity', false);
         this.badShoot   = SoundAdd(this, 'sound:badShoot', false);
-        this.sGo2       = SoundAdd(this, 'sound:gunShoot1', false, 0.2);
 
         this.musicScene.play();
         
@@ -21,20 +28,19 @@ class Battle extends Phaser.Scene {
         this.K_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.K_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
 
-        // ----- game load loop ----- //
-        this.gunLoad   = true;
-        this.enterLoad = true;
-        this.spaceLOad = true;
-        this.titleGame = false;
+        // ----- action ----- //
+        this.alreadyFire  = false;
+        this.endChrono    = true;
+        this.inShootRound = false;
 
-        this.intervalGunLoad = setInterval(() => {
-            this.gunLoad   = true; 
-            this.enterLoad = true;
-            this.spaceLOad = true;
-        }, 1000)
+        // ----- boleen key loop ----- //
+        this.spaceKeyLoad = true;
+        this.shiftKeyLoad = true;
 
-        // ----- Game ----- //
-        this.gameLoad = false
+        this.interval = setInterval(() => {
+            this.spaceKeyLoad = true;
+            this.shiftKeyLoad = true;
+        }, 1000 );
 
         // ----- Image ----- //
         this.map          = this.physics.add.sprite(0, 0, 'spritesheet:battleMap').setOrigin(0, 0);
@@ -71,10 +77,8 @@ class Battle extends Phaser.Scene {
         this.fgHealthEnemy.fillStyle(0x4ADBD1, 0.8);
         this.fgHealthEnemy.fillRect(this.x2, this.y, 300, 30);
         
-        // ----- Shoot Game ----- //
-        this.startShootGame = false;
-
         // ----- Animation ----- //
+        // background image animation
         this.anims.create({
             key: 'iddleBG',
             frames: this.anims.generateFrameNumbers('spritesheet:battleMap', { start: 0, end: 1 }),
@@ -82,6 +86,7 @@ class Battle extends Phaser.Scene {
             repeat: -1
         });
 
+        // death enemy animation
         this.anims.create({
             key: 'deathE',
             frames: this.anims.generateFrameNumbers('spritesheet:deathEntity', { start: 0, end: 6 }),
@@ -89,6 +94,7 @@ class Battle extends Phaser.Scene {
             repeat: 0
         });
 
+        // death player animation
         this.anims.create({
             key: 'deathP',
             frames: this.anims.generateFrameNumbers('spritesheet:deathEntity', { start: 7, end: 14 }),
@@ -96,6 +102,7 @@ class Battle extends Phaser.Scene {
             repeat: 0
         });
 
+        // iddle player animation
         this.anims.create({
             key: 'iddleP',
             frames: this.anims.generateFrameNumbers('spritesheet:iddleEntity', { start: 2, end: 3 }),
@@ -103,6 +110,7 @@ class Battle extends Phaser.Scene {
             repeat: -1
         });
 
+        //  iddle enemy animation
         this.anims.create({
             key: 'iddleE',
             frames: this.anims.generateFrameNumbers('spritesheet:iddleEntity', { start: 0, end: 1 }),
@@ -121,85 +129,107 @@ class Battle extends Phaser.Scene {
     }
 
 
-    ShootGame() {
-        this.input.keyboard.on('keydown-SPACE', () => {
-            this.spaceIsPressed = true;
-            if (this.spaceLOad) {
-                if (!this.startShootGame && this.enterLoad && this.gameLoad) {
-                    this.iddleP.setActive(false).setVisible(false);
-                    this.player.setActive(true).setVisible(true);
-
-                    this.gunShoot2.play();
-
-                    setTimeout(() => {
-                        this.badShoot.play();
-                    }, 100);
-
-                    setTimeout(() => {      
-                        this.player.setActive(false).setVisible(false);
-                        this.iddleP.setActive(true).setVisible(true);
-                    }, 500);
-
-                    this.startShootGame = false;
-                    this.enterLoad = false;
-                    this.gunLoad = false;
-                    this.gameLoad = false;
-                }
-                else if (!this.Edeath && this.gunLoad && this.startShootGame) {
-                    this.gunShoot2.play();
-    
-                    enemyHealth -= 50;
-    
-                    this.fgHealthEnemy.clear();
-                    this.fgHealthEnemy.fillStyle(0x4ADBD1, 0.8);
-                    this.fgHealthEnemy.fillRect(this.x2, this.y, enemyHealth*3, 30);
-    
-                    this.iddleP.setActive(false).setVisible(false);
-                    this.player.setActive(true).setVisible(true);
-                    
-    
-                    if (enemyHealth < 1) {
-                        this.deathSound.play();
-    
-                        this.iddleE.setActive(false).setVisible(false);
-                        this.deathE.setActive(true).setVisible(true);
-    
-                        this.deathE.anims.play('deathE');
-    
-                        this.Edeath = true;
-
-                        this.cameras.main.fadeOut(1000, 0, 0, 0);
-                        setTimeout(() => {
-                            this.musicScene.stop();
-                            this.scene.start('map');
-                            this.scene.stop('battle');
-                        }, 1000);
-                    }
-    
-                    setTimeout(() => {      
-                        this.player.setActive(false).setVisible(false);
-                        this.iddleP.setActive(true).setVisible(true);
-                    }, 500);
-    
-                    this.gunLoad = false;
-                    this.startShootGame = false;
-                    this.gameLoad = false;
-                } 
-                setTimeout(() => {
-                    this.timeTxt.text = "";
-                    this.startShootGame = false;
-                    this.titleGame = true;
-                }, 2000);
-
-                this.spaceLOad = false;
-                this.spaceIsPressed = false;
-            }
+    shoot(target) {
+        if (target == 'player') {
+            // play gun music
+            [this.gunShoot1, this.gunShoot2, this.gunShoot3][itemsSelect].play()
             
-        })
+            // remove enemy health
+            if ((enemyHealth-ItemsShopCapacity[itemsSelect][2]*10) < 0) {
+                enemyHealth = 0
+            }
+            else {
+                enemyHealth -= ItemsShopCapacity[itemsSelect][2]*10;
+            }
+
+            // update health bar
+            this.fgHealthEnemy.clear();
+            this.fgHealthEnemy.fillStyle(0x4ADBD1, 0.8);
+            this.fgHealthEnemy.fillRect(this.x2, this.y, enemyHealth*3, 30);
+
+            // change player animation (iddle to shoot)
+            this.iddleP.setActive(false).setVisible(false);
+            this.player.setActive(true).setVisible(true);
+            
+            // kill enemy and change scene if enemy health is < 1
+            if (enemyHealth < 1) {
+                this.deathSound.play();
+
+                this.iddleE.setActive(false).setVisible(false);
+                this.deathE.setActive(true).setVisible(true);
+
+                this.deathE.anims.play('deathE');
+
+                this.Edeath = true;
+                
+                // chnage scene with a fade effect
+                setTimeout(() => {
+                    this.cameras.main.fadeOut(1000, 0, 0, 0);
+                    setTimeout(() => {
+                        this.musicScene.stop();
+                        this.scene.start('map');
+                        this.scene.stop('battle');
+                    }, 1000);
+                }, 2000)
+                
+            }
+
+            // change player animation (shoot to iddle)
+            setTimeout(() => {      
+                this.player.setActive(false).setVisible(false);
+                this.iddleP.setActive(true).setVisible(true);
+            }, 500);
+        }
     }
 
+
+    ShootGame() {
+        this.input.keyboard.on('keydown-SPACE', () => {
+
+            if (this.spaceKeyLoad) {
+
+                this.spaceKeyLoad = false;
+
+                if (this.inShootRound) {
+
+                    if (!this.alreadyFire) {
+
+                        this.alreadyFire = true;
+
+                        //alert(this.endChrono)
+
+                        if (!this.endChrono) {
+                            this.endChrono = false
+                            this.iddleP.setActive(false).setVisible(false);
+                            this.player.setActive(true).setVisible(true);
+    
+                            this.gunShoot2.play();
+    
+                            setTimeout(() => {
+                                this.badShoot.play();
+                            }, 100);
+    
+                            setTimeout(() => {      
+                                this.player.setActive(false).setVisible(false);
+                                this.iddleP.setActive(true).setVisible(true);
+                            }, 500);
+                        }
+
+                        else if (this.endChrono){
+                            this.shoot('player')
+                        }
+
+                        this.inShootRound = false;
+                    }
+                }
+            }
+        })
+    }
     chrono() {
         // ----- Tick Sound ----- //
+        this.inShootRound = true;
+        this.endChrono = false;
+
         this.s321 = SoundAdd(this, 'sound:321', false);
 
         // ----- Chrono system ----- //
@@ -208,7 +238,7 @@ class Battle extends Phaser.Scene {
         const time_delay_2 = time_delay;
 
         for(let i=time_loops; i>=0; i--) {
-            if (i>0) {
+            if(i>0) {
                 setTimeout(() => {
                     this.timeTxt.text = i.toString();
                     this.timeTxt.setTint(0xf26419);
@@ -219,7 +249,6 @@ class Battle extends Phaser.Scene {
             }
             else {
                 setTimeout(() => {
-                    this.startShootGame = true;
                     this.timeTxt.text = '>';
                     this.timeTxt.setTint(0x758e4f);
                 }, time_delay);
@@ -229,27 +258,35 @@ class Battle extends Phaser.Scene {
                 setTimeout(() => {
                     this.timeTxt.text = '';
                 }, time_delay);
+
+                this.endChrono = true;
             }
         }
     }
 
+    // shift title section
     loadTitleGame() {
-        // ----- title ----- //
-        if (this.titleGame && !this.Pdeath && !this.Edeath) {
+        if (this.endChrono && !this.inShootRound) {
+
             this.infoTxt.text = "Press SHIFT button";
             this.infoTxt.setTint(0x834b36);
 
-            if (this.K_enter.isDown && !this.startShootGame) {
+            if (this.K_enter.isDown) {
                 this.infoTxt.text = "";
                 this.chrono();
-                this.gameLoad = true;
-                this.titleGame = false;
+
+                // reset var
+                this.alreadyFire = false;
             }
-        } 
+        }
+
+        else {
+            this.ShootGame()
+        }
     }
 
     update() {
+        console.log(this.endChrono)
         this.loadTitleGame();
-        this.ShootGame();
     }
 }
