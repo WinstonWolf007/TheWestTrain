@@ -42,9 +42,12 @@ class Load extends Phaser.Scene {
         this.load.image("image:money1", "./Assets/Icon/money1.png");
         this.load.image("image:money2", "./Assets/Icon/money2.png");
         this.load.image("image:money3", "./Assets/Icon/money3.png");
-        this.load.image('image:shopItems1', "./Assets/Icon/shopItems0.png");
-        this.load.image('image:shopItems2', "./Assets/Icon/shopItems1.png");
-        this.load.image('image:shopItems3', "./Assets/Icon/shopItems2.png");
+        this.load.image('image:shopItems1', "./Assets/Icon/gunIcon0.png");
+        this.load.image('image:shopItems2', "./Assets/Icon/gunIcon1.png");
+        this.load.image('image:shopItems3', "./Assets/Icon/gunIcon2.png");
+        this.load.image('image:shopIcon0', "./Assets/Icon/icon0.png");
+        this.load.image('image:shopIcon1', "./Assets/Icon/icon1.png");
+        this.load.image('image:shopIcon2', "./Assets/Icon/icon2.png");
 
         // SPRITESHEET //
         this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600});
@@ -62,7 +65,7 @@ class Load extends Phaser.Scene {
         this.load.spritesheet("spritesheet:deathEntity", "./Assets/entity/deathEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:iddleEntity", "./Assets/entity/iddleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
 
-        // bar
+        // The loading bar
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);

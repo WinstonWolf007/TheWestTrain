@@ -10,17 +10,16 @@ class Battle extends Phaser.Scene {
     create() {
         // ----- Music + Sound ----- //
         this.musicScene = SoundAdd(this, 'music:irreducible', true);
-        this.musicScene.play()
-
         this.gunShoot2  = SoundAdd(this, 'sound:gunShoot2', false);
         this.deathSound = SoundAdd(this, 'sound:electricity', false);
-        this.badShoot = SoundAdd(this, 'sound:badShoot', false);
+        this.badShoot   = SoundAdd(this, 'sound:badShoot', false);
+        this.sGo2       = SoundAdd(this, 'sound:gunShoot1', false, 0.2);
 
-        this.sGo2 = SoundAdd(this, 'sound:gunShoot1', false, 0.2);
+        this.musicScene.play();
         
         // ----- Key code ----- //
-        this.K_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.K_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT)
+        this.K_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.K_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
 
         // ----- game load loop ----- //
         this.gunLoad   = true;
@@ -102,23 +101,22 @@ class Battle extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('spritesheet:iddleEntity', { start: 2, end: 3 }),
             frameRate: 1,
             repeat: -1
-        })
+        });
 
         this.anims.create({
             key: 'iddleE',
             frames: this.anims.generateFrameNumbers('spritesheet:iddleEntity', { start: 0, end: 1 }),
             frameRate: 1,
             repeat: -1
-        })
+        });
 
         this.map.anims.play('iddleBG');
         this.iddleP.play('iddleP');
         this.iddleE.play('iddleE');
 
         // ----- Txt ----- //
-        this.infoTxt = this.add.text(450, 150, '', {fontSize: 50, fontFamily: 'pixelMoney'});
-        this.timeTxt = this.add.text((1500-100)/2, 200, '', {fontSize: 100, fontFamily: 'pixelMoney'});
-        
+        this.infoTxt   = this.add.text(450, 150, '', {fontSize: 50, fontFamily: 'pixelMoney'});
+        this.timeTxt   = this.add.text((1500-100)/2, 200, '', {fontSize: 100, fontFamily: 'pixelMoney'});
         this.titleGame = true;
     }
 
@@ -131,18 +129,18 @@ class Battle extends Phaser.Scene {
                     this.iddleP.setActive(false).setVisible(false);
                     this.player.setActive(true).setVisible(true);
 
-                    this.gunShoot2.play()
+                    this.gunShoot2.play();
 
                     setTimeout(() => {
-                        this.badShoot.play()
-                    }, 100)
+                        this.badShoot.play();
+                    }, 100);
 
                     setTimeout(() => {      
                         this.player.setActive(false).setVisible(false);
                         this.iddleP.setActive(true).setVisible(true);
-                    }, 500)
+                    }, 500);
 
-                    this.startShootGame = false
+                    this.startShootGame = false;
                     this.enterLoad = false;
                     this.gunLoad = false;
                     this.gameLoad = false;
@@ -161,7 +159,7 @@ class Battle extends Phaser.Scene {
                     
     
                     if (enemyHealth < 1) {
-                        this.deathSound.play()
+                        this.deathSound.play();
     
                         this.iddleE.setActive(false).setVisible(false);
                         this.deathE.setActive(true).setVisible(true);
@@ -172,16 +170,16 @@ class Battle extends Phaser.Scene {
 
                         this.cameras.main.fadeOut(1000, 0, 0, 0);
                         setTimeout(() => {
-                            this.musicScene.stop()
+                            this.musicScene.stop();
                             this.scene.start('map');
-                            this.scene.stop('battle')
-                        }, 1000)
+                            this.scene.stop('battle');
+                        }, 1000);
                     }
     
                     setTimeout(() => {      
                         this.player.setActive(false).setVisible(false);
                         this.iddleP.setActive(true).setVisible(true);
-                    }, 500)
+                    }, 500);
     
                     this.gunLoad = false;
                     this.startShootGame = false;
@@ -191,7 +189,7 @@ class Battle extends Phaser.Scene {
                     this.timeTxt.text = "";
                     this.startShootGame = false;
                     this.titleGame = true;
-                }, 2000)
+                }, 2000);
 
                 this.spaceLOad = false;
                 this.spaceIsPressed = false;
@@ -204,26 +202,30 @@ class Battle extends Phaser.Scene {
         // ----- Tick Sound ----- //
         this.s321 = SoundAdd(this, 'sound:321', false);
 
-        const time_loops = randint(3, 5);
-        let time_delay = randint(400, 1000);
+        // ----- Chrono system ----- //
+        const time_loops   = randint(3, 5);
+        let time_delay     = randint(400, 1000);
         const time_delay_2 = time_delay;
 
         for(let i=time_loops; i>=0; i--) {
             if (i>0) {
                 setTimeout(() => {
-                    this.timeTxt.text = i.toString();;
+                    this.timeTxt.text = i.toString();
                     this.timeTxt.setTint(0xf26419);
-                    this.s321.play()
+                    this.s321.play();
                 }, time_delay);
+
                 time_delay += time_delay_2;
             }
             else {
                 setTimeout(() => {
-                    this.startShootGame = true
+                    this.startShootGame = true;
                     this.timeTxt.text = '>';
                     this.timeTxt.setTint(0x758e4f);
                 }, time_delay);
+
                 time_delay += time_delay_2;
+
                 setTimeout(() => {
                     this.timeTxt.text = '';
                 }, time_delay);
@@ -234,11 +236,12 @@ class Battle extends Phaser.Scene {
     loadTitleGame() {
         // ----- title ----- //
         if (this.titleGame && !this.Pdeath && !this.Edeath) {
-            this.infoTxt.text = "Press SHIFT button"
-            this.infoTxt.setTint(0x834b36)
+            this.infoTxt.text = "Press SHIFT button";
+            this.infoTxt.setTint(0x834b36);
+
             if (this.K_enter.isDown && !this.startShootGame) {
                 this.infoTxt.text = "";
-                this.chrono()
+                this.chrono();
                 this.gameLoad = true;
                 this.titleGame = false;
             }
@@ -246,7 +249,7 @@ class Battle extends Phaser.Scene {
     }
 
     update() {
-        this.loadTitleGame()
-        this.ShootGame()
+        this.loadTitleGame();
+        this.ShootGame();
     }
 }
