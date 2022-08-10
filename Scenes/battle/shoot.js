@@ -1,6 +1,6 @@
 /**
  * Remove health, update health bar, reset all animation && if player win -> change scene
- * @param {Onject} object 
+ * @param {Object} object 
  * @param {String} target - player || enemy 
  */
 function shoot(object, target) {

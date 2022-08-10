@@ -1,6 +1,6 @@
 /**
  * The shoot system, check if user shoot after chrono, if there aer bad shoot, etc
- * @param {Onject} object 
+ * @param {Object} object 
  */
 function shootGame(object) {
     object.input.keyboard.on('keydown-SPACE', () => {
