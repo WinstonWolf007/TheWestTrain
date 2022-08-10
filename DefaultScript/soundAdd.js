@@ -1,4 +1,11 @@
-// just a shotcut for add sound
+/**
+ * Create a phaser sound instance (This is a shortcut)
+ * @param {Object} self 
+ * @param {String} name 
+ * @param {Boolean} loop 
+ * @param {Float32Array} vol 
+ * @returns phaser sound instance
+ */
 function SoundAdd(self, name, loop, vol=null) {
     let type = name.split(':')[0]
     let struct = {volume: 0, loop: loop}

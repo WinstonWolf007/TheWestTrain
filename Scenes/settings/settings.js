@@ -6,26 +6,6 @@ class Settings extends Phaser.Scene {
         this.fontTxt = "bold 50px Arial"
     }
 
-    SetDefaultVolumeIcon() {
-        this.volumeIconBg = this.add.image(this.bgIconX, this.bgIconY, 'spritesheet:volume', getIdxVolumeIcon('bg')).setInteractive();
-        this.volumeIconFg = this.add.image(this.bgIconX, this.bgIconY+200, 'spritesheet:volume', getIdxVolumeIcon('fg')).setInteractive();
-
-        [this.volumeIconBg, this.volumeIconFg].forEach(VI => {
-            VI.setScale(0.4);
-        });
-    }
-
-    EventChangeVolumeIcon(volumeIcon, type) {
-        volumeIcon.on('pointerdown', () => {
-            if (this.reloadClick) {
-                updateVolume(type);
-                this.SetDefaultVolumeIcon();
-                this.reloadClick = false;
-                this.scene.restart();
-            }
-        })
-    }
-
     preload() {
         this.cameras.main.setBackgroundColor('#ead9a7');
     }
@@ -38,7 +18,7 @@ class Settings extends Phaser.Scene {
         this.btnBack = this.add.image(130, 80, "image:backBtn").setInteractive();
         this.btnBack.setScale(0.6);
         
-        this.SetDefaultVolumeIcon();
+        setDefaultVolumeIcon(this)
 
         this.txtMusic = this.add.text(this.bgIconX-300, this.bgIconY-25, 'Music', {font: this.fontTxt});
         this.txtSound = this.add.text(this.bgIconX-300, this.bgIconY-25+200, 'Sound', {font: this.fontTxt});
@@ -62,7 +42,7 @@ class Settings extends Phaser.Scene {
             this.scene.start('home');
         })
 
-        this.EventChangeVolumeIcon(this.volumeIconBg, 'bg');
-        this.EventChangeVolumeIcon(this.volumeIconFg, 'fg');
+        eventChangeVolumeIcon(this, this.volumeIconBg, 'bg');
+        eventChangeVolumeIcon(this, this.volumeIconFg, 'fg');
     }
 }

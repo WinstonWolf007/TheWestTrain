@@ -1,5 +1,9 @@
+/**
+ * It is used for display a chrono. (The cowboy combat system)
+ * @param {Object} object 
+ */
 function chrono(object) {
-    // ----- Tick Sound ----- //
+    // ----- 'Tick' Sound ----- //
     object.inShootRound = true;
     object.endChrono = false;
 

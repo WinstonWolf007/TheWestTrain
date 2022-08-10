@@ -1,3 +1,7 @@
+/**
+ * The shoot system, check if user shoot after chrono, if there aer bad shoot, etc
+ * @param {Onject} object 
+ */
 function shootGame(object) {
     object.input.keyboard.on('keydown-SPACE', () => {
 
@@ -10,8 +14,6 @@ function shootGame(object) {
                 if (!object.alreadyFire) {
 
                     object.alreadyFire = true;
-
-                    //alert(object.endChrono)
 
                     if (!object.endChrono) {
                         object.endChrono = false

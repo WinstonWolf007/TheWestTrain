@@ -1,3 +1,8 @@
+/**
+ * Remove health, update health bar, reset all animation && if player win -> change scene
+ * @param {Onject} object 
+ * @param {String} target - player || enemy 
+ */
 function shoot(object, target) {
     if (target == 'player') {
         // play gun music

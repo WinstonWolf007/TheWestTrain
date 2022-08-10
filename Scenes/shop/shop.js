@@ -90,13 +90,13 @@ class Shop extends Phaser.Scene {
 
         for (let i=0; i<3; i++) {
             [this.shopIcon1, this.shopIcon2, this.shopIcon3][i].on('pointerover', () => {
-                this.displayCharacteristicBar(i);
+                displayCharacteristicBar(this, i);
             })
         }
 
         for (let k=0; k<3; k++) {
             [this.shopIcon1, this.shopIcon2, this.shopIcon3][k].on('pointerout', () => {
-                this.clearCharacteristicBar();
+                clearCharacteristicBar(this);
             })
         }
 
@@ -140,24 +140,5 @@ class Shop extends Phaser.Scene {
         }
 
         this.moneyText.setTint(0xb47d58);
-    }
-
-    displayCharacteristicBar(i) {
-        let idx = 0;
-        let idx2 = 0;
-
-        for (let el of [this.FGbar0, this.FGbar1, this.FGbar2]) {
-            el.clear();
-            el.fillStyle(0xb47d58);
-            el.fillRect(540, 390+idx, 320/5*ItemsShopCapacity[i][idx2], 10);
-            idx += 50;
-            idx2 += 1;
-        }
-    }
-
-    clearCharacteristicBar() {
-        for (let el of [this.FGbar0, this.FGbar1, this.FGbar2]) {
-            el.clear();
-        }
     }
 }

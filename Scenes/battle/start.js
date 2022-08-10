@@ -1,3 +1,7 @@
+/**
+ * Begin the game (The title 'Press shift button')
+ * @param {Object} object 
+ */
 function start(object) {
     if (object.endChrono && !object.inShootRound) {
 

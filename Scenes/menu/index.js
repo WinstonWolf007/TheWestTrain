@@ -5,40 +5,6 @@ class Menu extends Phaser.Scene {
         this.reloadClick = true;
     }
 
-    SetLightBtn(num) {
-        this.iconLightBtn = this.add.image(180, 530, 'spritesheet:menuLight', num).setInteractive()
-        this.iconLightBtn.setScale(1.25)
-    }
-
-    ChangeColorAll(bool) {
-        let color;
-        let color2;
-
-        if (bool) {
-            color = 0xffffff;
-            color2 = 0xffffff;
-        } else {
-            color = 0x3b3b3b;
-            color2 = 0xb1b1b1;
-        }
-
-        [this.bg, this.btnInfo, this.btnMap, this.btnShop, this.iconChestCode, this.iconScreenData, this.iconScreenTitle].forEach(e => {
-            e.setTint(color);
-            this.iconLightBtn.setTint(color2)
-        });
-        
-    }
-
-    startScene(name) {
-        if (this.lightOpen) {
-            clearInterval(this.timer);
-            this.lightOpen = false;
-            this.bgMusic.stop();
-            this.scene.start(name);
-            this.scene.stop('menu');
-        }
-    }
-
     callback() {
         this.reloadClick = true;
     }
@@ -97,7 +63,7 @@ class Menu extends Phaser.Scene {
         this.btnBack.setScale(0.6)
 
         // ---------- Event ---------- //
-        this.SetLightBtn(0);
+        setLightBtn(this, 0);
 
         btnEvent([this.btnBack, this.iconChestCode, this.btnShop, this.btnMap, this.btnInfo], this.clickSound, 0xffff0f);
         
@@ -106,12 +72,12 @@ class Menu extends Phaser.Scene {
             this.bgMusic.pause();
         })
         this.btnShop.on('pointerdown', () => {
-            this.startScene('shop');
+            startScene(this, 'shop');
             this.bgMusic.pause()
         })
 
         this.btnMap.on('pointerdown', () => {
-            this.startScene('map');
+            startScene(this, 'map');
             this.bgMusic.pause()
         })
 
@@ -141,10 +107,10 @@ class Menu extends Phaser.Scene {
 
                 if (this.lightOpen) {
                     this.lightOpen = false;
-                    this.SetLightBtn(0);
+                    setLightBtn(this, 0);
                 } else {
                     this.lightOpen = true;  
-                    this.SetLightBtn(1);
+                    setLightBtn(this, 1);
                 }
             }
         })
@@ -152,9 +118,9 @@ class Menu extends Phaser.Scene {
         if (this.lightOpen) {
             this.iconScreenData.anims.play("animsScreenData", true);
             this.iconScreenTitle.anims.play('animsScreenTitle', true);
-            this.ChangeColorAll(true);
+            changeColorAll(this, true);
         } else {
-            this.ChangeColorAll(false);
+            changeColorAll(this, false);
         }
     }
 }
