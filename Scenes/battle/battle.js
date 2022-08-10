@@ -8,6 +8,10 @@ class Battle extends Phaser.Scene {
     }
 
     create() {
+        // ------ money earned in the game + message ----- //
+        this.moneyEarned = Math.floor(Math.random() * 10)+1
+        this.earnMoneyMessage = new Score(this, `You have earned $${this.moneyEarned} !!!`);
+
         // ----- Enemy Capacity ----- //
         let enemyCapacity = {
             'health': enemyHealth,
@@ -32,6 +36,7 @@ class Battle extends Phaser.Scene {
         this.alreadyFire  = false;
         this.endChrono    = true;
         this.inShootRound = false;
+        this.endGame = false;
 
         // ----- boleen key loop ----- //
         this.spaceKeyLoad = true;
@@ -43,6 +48,7 @@ class Battle extends Phaser.Scene {
         }, 1000 );
 
         // ----- Image ----- //
+        this.earnMoneyMessage.add()
         this.map          = this.physics.add.sprite(0, 0, 'spritesheet:battleMap').setOrigin(0, 0);
 
         this.enemy        = this.physics.add.sprite(1200, 700, 'spritesheet:battleEntity', 0).setActive(false).setVisible(false);
@@ -128,165 +134,11 @@ class Battle extends Phaser.Scene {
         this.titleGame = true;
     }
 
-
-    shoot(target) {
-        if (target == 'player') {
-            // play gun music
-            [this.gunShoot1, this.gunShoot2, this.gunShoot3][itemsSelect].play()
-            
-            // remove enemy health
-            if ((enemyHealth-ItemsShopCapacity[itemsSelect][2]*10) < 0) {
-                enemyHealth = 0
-            }
-            else {
-                enemyHealth -= ItemsShopCapacity[itemsSelect][2]*10;
-            }
-
-            // update health bar
-            this.fgHealthEnemy.clear();
-            this.fgHealthEnemy.fillStyle(0x4ADBD1, 0.8);
-            this.fgHealthEnemy.fillRect(this.x2, this.y, enemyHealth*3, 30);
-
-            // change player animation (iddle to shoot)
-            this.iddleP.setActive(false).setVisible(false);
-            this.player.setActive(true).setVisible(true);
-            
-            // kill enemy and change scene if enemy health is < 1
-            if (enemyHealth < 1) {
-                this.deathSound.play();
-
-                this.iddleE.setActive(false).setVisible(false);
-                this.deathE.setActive(true).setVisible(true);
-
-                this.deathE.anims.play('deathE');
-
-                this.Edeath = true;
-                
-                // chnage scene with a fade effect
-                setTimeout(() => {
-                    this.cameras.main.fadeOut(1000, 0, 0, 0);
-                    setTimeout(() => {
-                        this.musicScene.stop();
-                        this.scene.start('map');
-                        this.scene.stop('battle');
-                    }, 1000);
-                }, 2000)
-                
-            }
-
-            // change player animation (shoot to iddle)
-            setTimeout(() => {      
-                this.player.setActive(false).setVisible(false);
-                this.iddleP.setActive(true).setVisible(true);
-            }, 500);
-        }
-    }
-
-
-    ShootGame() {
-        this.input.keyboard.on('keydown-SPACE', () => {
-
-            if (this.spaceKeyLoad) {
-
-                this.spaceKeyLoad = false;
-
-                if (this.inShootRound) {
-
-                    if (!this.alreadyFire) {
-
-                        this.alreadyFire = true;
-
-                        //alert(this.endChrono)
-
-                        if (!this.endChrono) {
-                            this.endChrono = false
-                            this.iddleP.setActive(false).setVisible(false);
-                            this.player.setActive(true).setVisible(true);
-    
-                            this.gunShoot2.play();
-    
-                            setTimeout(() => {
-                                this.badShoot.play();
-                            }, 100);
-    
-                            setTimeout(() => {      
-                                this.player.setActive(false).setVisible(false);
-                                this.iddleP.setActive(true).setVisible(true);
-                            }, 500);
-                        }
-
-                        else if (this.endChrono){
-                            this.shoot('player')
-                        }
-
-                        this.inShootRound = false;
-                    }
-                }
-            }
-        })
-    }
-    chrono() {
-        // ----- Tick Sound ----- //
-        this.inShootRound = true;
-        this.endChrono = false;
-
-        this.s321 = SoundAdd(this, 'sound:321', false);
-
-        // ----- Chrono system ----- //
-        const time_loops   = randint(3, 5);
-        let time_delay     = randint(400, 1000);
-        const time_delay_2 = time_delay;
-
-        for(let i=time_loops; i>=0; i--) {
-            if(i>0) {
-                setTimeout(() => {
-                    this.timeTxt.text = i.toString();
-                    this.timeTxt.setTint(0xf26419);
-                    this.s321.play();
-                }, time_delay);
-
-                time_delay += time_delay_2;
-            }
-            else {
-                setTimeout(() => {
-                    this.timeTxt.text = '>';
-                    this.timeTxt.setTint(0x758e4f);
-                }, time_delay);
-
-                time_delay += time_delay_2;
-
-                setTimeout(() => {
-                    this.timeTxt.text = '';
-                }, time_delay);
-
-                this.endChrono = true;
-            }
-        }
-    }
-
-    // shift title section
-    loadTitleGame() {
-        if (this.endChrono && !this.inShootRound) {
-
-            this.infoTxt.text = "Press SHIFT button";
-            this.infoTxt.setTint(0x834b36);
-
-            if (this.K_enter.isDown) {
-                this.infoTxt.text = "";
-                this.chrono();
-
-                // reset var
-                this.alreadyFire = false;
-            }
-        }
-
-        else {
-            this.ShootGame()
-        }
-    }
-
     update() {
-        console.log(this.endChrono)
-        this.loadTitleGame();
+        start(this);
+
+        if(this.endGame) {
+            this.earnMoneyMessage.loop();
+        }
     }
 }

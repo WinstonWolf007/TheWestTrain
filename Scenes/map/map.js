@@ -45,6 +45,11 @@ class Map extends Phaser.Scene {
                         img.setTint(0xffffff)
                         setCursor('default')
                     })
+
+                    img.setInteractive().on('pointerdown', () => {
+                        this.scene.start('battle')
+                        this.scene.stop('map')
+                    })
                 }
             }
         }

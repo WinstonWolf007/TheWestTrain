@@ -57,6 +57,7 @@ class Menu extends Phaser.Scene {
         // -------------- Music + Sound ------------- //
         this.clickSound = SoundAdd(this, 'sound:click', false);
         this.bgMusic = SoundAdd(this, 'music:drone-9708', true);
+        this.bgMusic = SoundAdd(this, 'music:drone-9708')
         this.bizzSound = SoundAdd(this, 'sound:electricity', false);
         this.smallBizzSound = SoundAdd(this, 'sound:smallElectricity', false);
         
@@ -98,8 +99,7 @@ class Menu extends Phaser.Scene {
         // ---------- Event ---------- //
         this.SetLightBtn(0);
 
-        btnEvent([this.btnBack], this.clickSound, 0xffff0f)
-        btnEvent([this.iconChestCode, this.btnShop, this.btnMap, this.btnInfo], this.clickSound, 0xf0ffff, this);
+        btnEvent([this.btnBack, this.iconChestCode, this.btnShop, this.btnMap, this.btnInfo], this.clickSound, 0xffff0f);
         
         this.btnBack.on('pointerdown', () => {
             this.scene.start('home')

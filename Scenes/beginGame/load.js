@@ -26,7 +26,7 @@ class Load extends Phaser.Scene {
         this.load.audio('sound:reloadGun4', './Assets/music/battle/reloadGun/mixkit-shotgun-long-pump-1666.wav')
         this.load.audio('sound:321', './Assets/music/battle/time/321.wav')
         this.load.audio('sound:go', './Assets/music/battle/time/go.wav')
-        this.load.audio('sound:badShoot', './Assets/music/battle/gunSound/mixkit-falling-into-mud-surface-385.wav')
+        this.load.audio('sound:badShoot', './Assets/music/battle/gunSound/impact.wav')
 
         // MUSIC //
         this.load.audio('music:chill-abstract-intention', './Assets/music/Bar/chill-abstract-intention-12099.mp3');
@@ -50,6 +50,9 @@ class Load extends Phaser.Scene {
         this.load.image('image:shopIcon0', "./Assets/Icon/icon0.png");
         this.load.image('image:shopIcon1', "./Assets/Icon/icon1.png");
         this.load.image('image:shopIcon2', "./Assets/Icon/icon2.png");
+        this.load.image('image:score', "./Assets/Icon/score.png");
+        this.load.image('image:score2', "./Assets/Icon/score2.png");
+        this.load.image('image:score3', "./Assets/Icon/score3.png");
 
         // SPRITESHEET //
         this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600});
@@ -87,8 +90,9 @@ class Load extends Phaser.Scene {
 
     create() {
         // this.scene.start('licence')
-        this.scene.start('shop');
-        //this.scene.start('battle');
+        //this.scene.start('shop');
+        this.scene.start('battle');
         //this.scene.start('menu')
+        //this.scene.start('test')
     }
 }

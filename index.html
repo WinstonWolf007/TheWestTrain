@@ -39,6 +39,8 @@
 
     <script src="./DefaultScript/volume.js"></script>
 
+    <script src="./DefaultScript/score.js"></script>
+
     <!-- All scenes game -->
     <script src="./Scenes/beginGame/load.js"></script>
 
@@ -50,6 +52,10 @@
 
     <script src="./Scenes/map/map.js"></script>
 
+    <script src="./Scenes/battle/start.js"></script>
+    <script src="./Scenes/battle/game.js"></script>
+    <script src="./Scenes/battle/shoot.js"></script>
+    <script src="./Scenes/battle/chrono.js"></script>
     <script src="./Scenes/battle/battle.js"></script>
 
     <script src="./Scenes/menu/index.js"></script>
@@ -58,13 +64,15 @@
 
     <script src="./Scenes/home.js"></script>
 
+    <script src="./Scenes/test/test.js"></script>
+
     <!-- Home config -->
     <script>
         const config = {
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Load, Company, Home, Settings, Shop, Menu, Map, Battle],
+            scene: [Load, Company, Home, Settings, Shop, Menu, Map, Battle, Test],
             //scene: [Load, Map],
             physics: {
                 default: 'arcade',

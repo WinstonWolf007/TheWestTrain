@@ -12,7 +12,7 @@ let JSON = {
     }
 }
 
-let money = 40
+let money = 75
 let playerHealth = 100
 let enemyHealth = 100
 
