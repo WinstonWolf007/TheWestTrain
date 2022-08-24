@@ -107,7 +107,7 @@ class Load extends Phaser.Scene {
     create() {
         // this.scene.start('licence')
         // this.scene.start('shop')
-        this.scene.start('mine1');
+        this.scene.start('map');
         //this.scene.start('battle');
         // this.scene.start('menu')
         // this.scene.start('test')

@@ -107,5 +107,10 @@ class Map extends Phaser.Scene {
             this.scene.start('menu');
             this.scene.stop('map');
         });
+
+        basements['b2'][0].on('pointerdown', () => {
+            this.scene.start('mine1');
+            this.scene.stop();
+        })
     }
 }

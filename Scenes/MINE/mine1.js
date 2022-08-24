@@ -1,14 +1,19 @@
 class Mine1 extends Phaser.Scene {
     constructor() {
         super('mine1');
-        this.startGame = false;
-        this.screenEffect = true;
-        this.resetKey = true;
     }
 
     create() {
+        this.startGame = false;
+        this.screenEffect = true;
+        this.resetKey = true;
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        
         // ----- [KEY] ----- //
         this.keyE = this.input.keyboard.addKey('E');
+        this.keyUP = this.input.keyboard.addKey('UP');
+
         this.intervalKey = setInterval(() => {
             this.resetKey = true;
         }, 1000)
@@ -70,8 +75,17 @@ class Mine1 extends Phaser.Scene {
             }
             this.resetKey = false;
         });
-        //keyE.on('up', () => {});
 
+        this.keyUP.on('down', () => {
+            if (this.resetKey) {
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                setTimeout(() => {
+                    this.bgMusic.stop()
+                    this.scene.start('map');
+                    this.scene.stop()
+                }, 1500)
+            }
+        })
 
         // ----- [TEXT] ----- //
         this.mineCallEventText = this.add.text(720, 450, '', {fontSize: 30, fontFamily: 'pixelMoney'})
