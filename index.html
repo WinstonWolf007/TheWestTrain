@@ -55,6 +55,8 @@
     <script src="./Scenes/map/create.js"></script>
     <script src="./Scenes/map/map.js"></script>
 
+    <script src="./Scenes/MINE/mine1.js"></script>
+
     <script src="./Scenes/battle/enemyReact.js"></script>
     <script src="./Scenes/battle/start.js"></script>
     <script src="./Scenes/battle/game.js"></script>
@@ -81,7 +83,9 @@
             type: Phaser.AUTO,
             width: 1500,
             height: 920,
-            scene: [Load, Company, Home, Settings, Shop, Menu, Map, Battle, Test],
+            scene: [
+                Load, Company, Home, Settings, Shop, Menu, Map, Battle, Test, Mine1
+            ],
             //scene: [Load, Map],
             physics: {
                 default: 'arcade',

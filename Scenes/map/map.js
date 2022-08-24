@@ -9,8 +9,6 @@ class Map extends Phaser.Scene {
     }
 
     create() {
-        //getGraf(this, 30);
-
         let position = {
             'b1': [
                 [400, 100],

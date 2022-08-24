@@ -28,12 +28,19 @@ class Load extends Phaser.Scene {
         this.load.audio('sound:go', './Assets/music/battle/time/go.wav')
         this.load.audio('sound:badShoot', './Assets/music/battle/gunSound/impact.wav')
 
+        this.load.audio('sound:fallImpact', './Assets/music/basement/mine/fallImpact/rock-smash-6304-CUT-VERSION.mp3')
+        this.load.audio('sound:mineEntitySpeak1', './Assets/music/basement/mine/mineEntitySpeakSound/little-robot-sound-84657-CUT-VERSION.mp3')
+        this.load.audio('sound:mineEntitySpeak2', './Assets/music/basement/mine/mineEntitySpeakSound/little-robot-sound-84657-CUT-VERSION2.mp3')
+        this.load.audio('sound:mineEntitySpeak3', './Assets/music/basement/mine/mineEntitySpeakSound/little-robot-sound-84657-CUT-VERSION3.mp3')
+
         // MUSIC //
         this.load.audio('music:chill-abstract-intention', './Assets/music/Bar/chill-abstract-intention-12099.mp3');
         this.load.audio('music:drone-9708', './Assets/music/Menu/drone-9708.mp3');
         this.load.audio("music:my-life-main", './Assets/music/Home/my-life-main-6670.mp3');
         this.load.audio('music:aspire', './Assets/music/battle/1/aspire-111789.mp3')
         this.load.audio('music:irreducible', './Assets/music/battle/2/irreducible-111374.mp3')
+
+        this.load.audio('music:darkCave', './Assets/music/basement/mine/backgroundMusic/the-cave-dweller-dark-ambient-soundscape-108560.mp3')
 
         // IMAGE //
         this.load.image('image:menuTitle', './Assets/map-menu/menuTitle.png');
@@ -54,6 +61,9 @@ class Load extends Phaser.Scene {
         this.load.image('image:score2', "./Assets/Icon/score2.png");
         this.load.image('image:score3', "./Assets/Icon/score3.png");
 
+        this.load.image('image:bgMine', './Assets/map-menu/backgroundMine.png');
+        this.load.image('image:ladder', './Assets/Icon/ladder.png');
+
         // SPRITESHEET //
         this.load.spritesheet('spritesheet:basements', './Assets/basement/basements.png', {frameWidth: 750, frameHeight: 600});
         this.load.spritesheet('spritesheet:menuChest', './Assets/Icon/menuChest(264x408).png', {frameWidth: 264,frameHeight: 408});
@@ -69,9 +79,12 @@ class Load extends Phaser.Scene {
         this.load.spritesheet("spritesheet:battleEntity", "./Assets/entity/battleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:deathEntity", "./Assets/entity/deathEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:iddleEntity", "./Assets/entity/iddleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
-        this.load.spritesheet('spritesheet:map1', 'Assets/map-menu/map(160x150).png', {frameWidth: 160, frameHeight: 150});
-        this.load.spritesheet('spritesheet:map2', 'Assets/map-menu/map(1500x510).png', {frameWidth: 1500, frameHeight: 510});
-        this.load.spritesheet('spritesheet:map3', 'Assets/map-menu/map(920x390).png', {frameWidth: 920, frameHeight: 390});
+        this.load.spritesheet('spritesheet:map1', './Assets/map-menu/map(160x150).png', {frameWidth: 160, frameHeight: 150});
+        this.load.spritesheet('spritesheet:map2', './Assets/map-menu/map(1500x510).png', {frameWidth: 1500, frameHeight: 510});
+        this.load.spritesheet('spritesheet:map3', './Assets/map-menu/map(920x390).png', {frameWidth: 920, frameHeight: 390});
+
+        this.load.spritesheet('spritesheet:playerFall', './Assets/entity/fallingPlayer(250x370).png', {frameWidth: 250, frameHeight: 370});
+        this.load.spritesheet('spritesheet:mineEntity', './Assets/entity/MineEntity.png', {frameWidth: 60, frameHeight: 160})
 
         // The loading bar
         var progressBar = this.add.graphics();
@@ -94,7 +107,7 @@ class Load extends Phaser.Scene {
     create() {
         // this.scene.start('licence')
         // this.scene.start('shop')
-        this.scene.start('map');
+        this.scene.start('mine1');
         //this.scene.start('battle');
         // this.scene.start('menu')
         // this.scene.start('test')
