@@ -4,27 +4,27 @@ class Battle extends Phaser.Scene {
     }
 
     preload() {
-        this.cameras.main.fadeIn(1000, 0, 0, 0);
-    }
-
-    create() {
         // ------ money earned in the game + message ----- //
         this.moneyEarned = Math.floor(Math.random() * 10)+1
         this.earnMoneyMessage = new Score(this, `You have earned $${this.moneyEarned} !!!`);
 
-        // ----- Enemy Capacity ----- //
-        let enemyCapacity = {
-            'health': enemyHealth,
-            'weapon': ItemsShopCapacity[Math.floor(Math.random() * 3)]
-        }
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+    }
+
+    create() {
+        // ----- Reaction time of the enemy ----- //
+        this.enemyReaction = enemyReact();
+        this.enemyShoot = false;
+        this.enemyShootBool = false;
 
         // ----- Music + Sound ----- //
         this.musicScene = SoundAdd(this, 'music:irreducible', true);
-        this.gunShoot1  = SoundAdd(this, 'sound:gunShoot1', false);
-        this.gunShoot2  = SoundAdd(this, 'sound:gunShoot2', false);
-        this.gunShoot3  = SoundAdd(this, 'sound:gunShoot3', false);
+
+        this.gunShoot = SoundAdd(this, ['sound:gunShoot1', 'sound:gunShoot2', 'sound:gunShoot3'][itemsSelect], false);
         this.deathSound = SoundAdd(this, 'sound:electricity', false);
         this.badShoot   = SoundAdd(this, 'sound:badShoot', false);
+
+        this.gunShootE = SoundAdd(this, 'sound:gunShoot1', false);
 
         this.musicScene.play();
         
@@ -33,10 +33,11 @@ class Battle extends Phaser.Scene {
         this.K_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
 
         // ----- action ----- //
-        this.alreadyFire  = false;
-        this.endChrono    = true;
-        this.inShootRound = false;
-        this.endGame = false;
+        this.playerBadShoot = false;
+        this.alreadyFire    = false;
+        this.endChrono      = true;
+        this.inShootRound   = false;
+        this.endGame        = false;
 
         // ----- boleen key loop ----- //
         this.spaceKeyLoad = true;
@@ -48,10 +49,9 @@ class Battle extends Phaser.Scene {
         }, 1000 );
 
         // ----- Image ----- //
-        this.earnMoneyMessage.add()
         this.map          = this.physics.add.sprite(0, 0, 'spritesheet:battleMap').setOrigin(0, 0);
 
-        this.enemy        = this.physics.add.sprite(1200, 700, 'spritesheet:battleEntity', 0).setActive(false).setVisible(false);
+        this.enemy        = this.physics.add.sprite(1200, 700, 'spritesheet:battleEntity', 1).setActive(false).setVisible(false);
         this.deathE       = this.physics.add.sprite(1200, 700, 'spritesheet:deathEntity', 0).setActive(false).setVisible(false);
         this.iddleE       = this.physics.add.sprite(1200, 700, 'spritesheet:iddleEntity', 0);
         this.enemy.flipX  = true;
@@ -66,10 +66,13 @@ class Battle extends Phaser.Scene {
         this.x1             = 140;
         this.x2             = 1040;
         this.y              = 400;
+
         this.bgHealthPlayer = this.add.graphics();
         this.fgHealthPlayer = this.add.graphics();
+
         this.bgHealthEnemy  = this.add.graphics();
         this.fgHealthEnemy  = this.add.graphics();
+        
         this.Edeath         = false;
         this.Pdeath         = false;
         
@@ -132,13 +135,16 @@ class Battle extends Phaser.Scene {
         this.infoTxt   = this.add.text(450, 150, '', {fontSize: 50, fontFamily: 'pixelMoney'});
         this.timeTxt   = this.add.text((1500-100)/2, 200, '', {fontSize: 100, fontFamily: 'pixelMoney'});
         this.titleGame = true;
+
+        // ----- Pop Pop message ----- //
+        this.earnMoneyMessage.add()
     }
 
     update() {
         start(this);
 
         if(this.endGame) {
-            this.earnMoneyMessage.loop();
+            this.earnMoneyMessage.loop(100, 3);
         }
     }
 }

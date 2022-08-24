@@ -16,8 +16,8 @@ class Score {
      * @constructor
      */
     add() {
-        this.img = this.object.add.image(500, -150, 'image:score2')
-        this.text = this.object.add.text(500, -80, this.text, {fontSize: 50, fontFamily: 'pixelMoney'}).setOrigin().setTint(0x834b36)
+        this.img = this.object.add.image(700, -150, 'image:score2')
+        this.text = this.object.add.text(700, -80, this.text, {fontSize: 50, fontFamily: 'pixelMoney'}).setOrigin().setTint(0x834b36)
     }
 
     /**

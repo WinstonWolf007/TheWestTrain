@@ -69,6 +69,9 @@ class Load extends Phaser.Scene {
         this.load.spritesheet("spritesheet:battleEntity", "./Assets/entity/battleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:deathEntity", "./Assets/entity/deathEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
         this.load.spritesheet("spritesheet:iddleEntity", "./Assets/entity/iddleEntity(250X370).png", {frameWidth: 250, frameHeight: 370});
+        this.load.spritesheet('spritesheet:map1', 'Assets/map-menu/map(160x150).png', {frameWidth: 160, frameHeight: 150});
+        this.load.spritesheet('spritesheet:map2', 'Assets/map-menu/map(1500x510).png', {frameWidth: 1500, frameHeight: 510});
+        this.load.spritesheet('spritesheet:map3', 'Assets/map-menu/map(920x390).png', {frameWidth: 920, frameHeight: 390});
 
         // The loading bar
         var progressBar = this.add.graphics();
@@ -90,10 +93,10 @@ class Load extends Phaser.Scene {
 
     create() {
         // this.scene.start('licence')
-        //this.scene.start('shop')
-        this.scene.start('home');
-        // this.scene.start('battle');
-        //this.scene.start('menu')
-        //this.scene.start('test')
+        // this.scene.start('shop')
+        this.scene.start('map');
+        //this.scene.start('battle');
+        // this.scene.start('menu')
+        // this.scene.start('test')
     }
 }

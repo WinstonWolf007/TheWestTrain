@@ -3,7 +3,7 @@
  * @param {Object} object 
  */
 function start(object) {
-    if (object.endChrono && !object.inShootRound) {
+    if (object.endChrono && !object.inShootRound && !object.endGame) {
 
         object.infoTxt.text = "Press SHIFT button";
         object.infoTxt.setTint(0x834b36);
@@ -14,6 +14,7 @@ function start(object) {
 
             // reset var
             object.alreadyFire = false;
+            object.enemyShootBool = false;
         }
     }
 

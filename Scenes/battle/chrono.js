@@ -23,9 +23,16 @@ function chrono(object) {
             }, time_delay);
 
             time_delay += time_delay_2;
+            object.endChrono = false;
         }
         else {
             setTimeout(() => {
+                object.endChrono = true;
+                setTimeout(() => {
+                    if (!object.alreadyFire || object.playerBadShoot) {
+                        object.enemyShoot = true;
+                    }
+                }, object.enemyReaction*1000)
                 object.timeTxt.text = '>';
                 object.timeTxt.setTint(0x758e4f);
             }, time_delay);
@@ -36,7 +43,7 @@ function chrono(object) {
                 object.timeTxt.text = '';
             }, time_delay);
 
-            object.endChrono = true;
+            
         }
     }
 }
